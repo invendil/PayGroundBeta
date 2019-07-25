@@ -1,0 +1,16 @@
+C:\Users\Cikada\source\repos\PayGroundBeta\server\Web\bin\Debug\netcoreapp2.1\BuissnesLayer.dll
+C:\Users\Cikada\source\repos\PayGroundBeta\server\Web\bin\Debug\netcoreapp2.1\DataLayer.dll
+C:\Users\Cikada\source\repos\PayGroundBeta\server\Web\obj\Debug\netcoreapp2.1\WebApi.csprojAssemblyReference.cache
+C:\Users\Cikada\source\repos\PayGroundBeta\server\Web\obj\Debug\netcoreapp2.1\WebApi.csproj.CoreCompileInputs.cache
+C:\Users\Cikada\source\repos\PayGroundBeta\server\Web\obj\Debug\netcoreapp2.1\WebApi.AssemblyInfoInputs.cache
+C:\Users\Cikada\source\repos\PayGroundBeta\server\Web\obj\Debug\netcoreapp2.1\WebApi.AssemblyInfo.cs
+C:\Users\Cikada\source\repos\PayGroundBeta\server\Web\bin\Debug\netcoreapp2.1\WebApi.deps.json
+C:\Users\Cikada\source\repos\PayGroundBeta\server\Web\bin\Debug\netcoreapp2.1\WebApi.runtimeconfig.json
+C:\Users\Cikada\source\repos\PayGroundBeta\server\Web\bin\Debug\netcoreapp2.1\WebApi.runtimeconfig.dev.json
+C:\Users\Cikada\source\repos\PayGroundBeta\server\Web\bin\Debug\netcoreapp2.1\WebApi.dll
+C:\Users\Cikada\source\repos\PayGroundBeta\server\Web\bin\Debug\netcoreapp2.1\WebApi.pdb
+C:\Users\Cikada\source\repos\PayGroundBeta\server\Web\bin\Debug\netcoreapp2.1\BuissnesLayer.pdb
+C:\Users\Cikada\source\repos\PayGroundBeta\server\Web\bin\Debug\netcoreapp2.1\DataLayer.pdb
+C:\Users\Cikada\source\repos\PayGroundBeta\server\Web\obj\Debug\netcoreapp2.1\WebApi.csproj.CopyComplete
+C:\Users\Cikada\source\repos\PayGroundBeta\server\Web\obj\Debug\netcoreapp2.1\WebApi.dll
+C:\Users\Cikada\source\repos\PayGroundBeta\server\Web\obj\Debug\netcoreapp2.1\WebApi.pdb

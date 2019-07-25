@@ -1,0 +1,6 @@
+C:\Users\Cikada\source\repos\PayGroundBeta\server\DBRepository\bin\Debug\netcoreapp2.1\DBRepository.deps.json
+C:\Users\Cikada\source\repos\PayGroundBeta\server\DBRepository\bin\Debug\netcoreapp2.1\DBRepository.dll
+C:\Users\Cikada\source\repos\PayGroundBeta\server\DBRepository\obj\Debug\netcoreapp2.1\DBRepository.csprojAssemblyReference.cache
+C:\Users\Cikada\source\repos\PayGroundBeta\server\DBRepository\obj\Debug\netcoreapp2.1\DBRepository.csproj.CoreCompileInputs.cache
+C:\Users\Cikada\source\repos\PayGroundBeta\server\DBRepository\obj\Debug\netcoreapp2.1\DBRepository.AssemblyInfoInputs.cache
+C:\Users\Cikada\source\repos\PayGroundBeta\server\DBRepository\obj\Debug\netcoreapp2.1\DBRepository.AssemblyInfo.cs

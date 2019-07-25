@@ -1,0 +1,14 @@
+C:\aprojects\it\PresentationLayer\bin\Debug\netcoreapp2.1\PresentationLayer.deps.json
+C:\aprojects\it\PresentationLayer\bin\Debug\netcoreapp2.1\PresentationLayer.dll
+C:\aprojects\it\PresentationLayer\bin\Debug\netcoreapp2.1\PresentationLayer.pdb
+C:\aprojects\it\PresentationLayer\bin\Debug\netcoreapp2.1\BuissnesLayer.dll
+C:\aprojects\it\PresentationLayer\bin\Debug\netcoreapp2.1\DataLayer.dll
+C:\aprojects\it\PresentationLayer\bin\Debug\netcoreapp2.1\BuissnesLayer.pdb
+C:\aprojects\it\PresentationLayer\bin\Debug\netcoreapp2.1\DataLayer.pdb
+C:\aprojects\it\PresentationLayer\obj\Debug\netcoreapp2.1\PresentationLayer.csprojAssemblyReference.cache
+C:\aprojects\it\PresentationLayer\obj\Debug\netcoreapp2.1\PresentationLayer.csproj.CoreCompileInputs.cache
+C:\aprojects\it\PresentationLayer\obj\Debug\netcoreapp2.1\PresentationLayer.AssemblyInfoInputs.cache
+C:\aprojects\it\PresentationLayer\obj\Debug\netcoreapp2.1\PresentationLayer.AssemblyInfo.cs
+C:\aprojects\it\PresentationLayer\obj\Debug\netcoreapp2.1\PresentationLayer.csproj.CopyComplete
+C:\aprojects\it\PresentationLayer\obj\Debug\netcoreapp2.1\PresentationLayer.dll
+C:\aprojects\it\PresentationLayer\obj\Debug\netcoreapp2.1\PresentationLayer.pdb
