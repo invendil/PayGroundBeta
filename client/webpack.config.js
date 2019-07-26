@@ -10,6 +10,7 @@ module.exports = {
     resolve: {
         extensions: ['.js', '.jsx']
     },
+
     module: {
         loaders: [
             {
@@ -19,6 +20,11 @@ module.exports = {
                 query: {
                     presets: ['react', 'es2015', 'stage-3']
                 }
+            },
+
+            {
+                test: /\.css$/,
+                use: ["style-loader", "css-loader"]
             }
         ]
     },
