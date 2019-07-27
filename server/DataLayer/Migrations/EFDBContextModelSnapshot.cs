@@ -19,6 +19,33 @@ namespace DataLayer.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("DataLayer.Entityes.Company", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Category");
+
+                    b.Property<DateTime>("CreateTime");
+
+                    b.Property<string>("DesriptionMD");
+
+                    b.Property<DateTime>("FinishTime");
+
+                    b.Property<int>("GoalMoney");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("UrlVideo");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Companies");
+                });
+
             modelBuilder.Entity("DataLayer.Entityes.User", b =>
                 {
                     b.Property<int>("Id")

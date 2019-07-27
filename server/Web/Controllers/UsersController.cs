@@ -24,18 +24,46 @@ namespace WebApi.Controllers
     {
        
         private IUserService _userService;
+        private ICompanyService _companyService;
         private IMapper _mapper;
         private readonly AppSettings _appSettings;
 
         public UsersController(
             IUserService userService,
+            ICompanyService companyService,
             IMapper mapper,
             IOptions<AppSettings> appSettings)
         {
             _userService = userService;
             _mapper = mapper;
+            _companyService = companyService;
             _appSettings = appSettings.Value;
         }
+
+
+
+        [AllowAnonymous]
+        [HttpPost("addcompany")]
+        public IActionResult AddCompany([FromBody]CompanyModel companyModel)
+        {
+
+            Console.WriteLine("test ", companyModel);
+            // map dto to entity
+            var company = _mapper.Map<Company>(companyModel);
+
+            try
+            {
+                // save 
+                _companyService.Add(company);
+                return Ok();
+            }
+            catch (AppException ex)
+            {
+                // return error message if there was an exception
+                return BadRequest(ex.Message);
+            }
+        }
+
 
         [AllowAnonymous]
         [HttpPost("authenticate")]

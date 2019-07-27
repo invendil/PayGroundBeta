@@ -18,7 +18,7 @@ class BodyPage extends React.Component {
 
         return (
             <div>
-                <h1>COntent</h1>
+                <h1>Content</h1>
             </div>
         );
     }

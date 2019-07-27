@@ -34,7 +34,7 @@ export const UserLinks = props => {
         <Dropdown alignRight>
             <Dropdown.Toggle as={CustomToggle} />
             <Dropdown.Menu className="mt-2">
-                <Dropdown.Item as={Link} to='/' >
+                <Dropdown.Item as={Link} to='/create' >
                     New campaign
                 </Dropdown.Item>
                 <Dropdown.Item eventKey="2">Profile</Dropdown.Item>

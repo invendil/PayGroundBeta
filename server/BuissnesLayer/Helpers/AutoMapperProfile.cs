@@ -10,6 +10,9 @@ namespace BuissnesLayer.Helpers
         {
             CreateMap<User, UserModel>();
             CreateMap<UserModel, User>();
+            CreateMap<Company, CompanyModel>();
+            CreateMap<CompanyModel, Company>();
         }
+
     }
 }

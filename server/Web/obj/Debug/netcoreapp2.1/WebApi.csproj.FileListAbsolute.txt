@@ -14,3 +14,6 @@ C:\Users\Cikada\source\repos\PayGroundBeta\server\Web\bin\Debug\netcoreapp2.1\Da
 C:\Users\Cikada\source\repos\PayGroundBeta\server\Web\obj\Debug\netcoreapp2.1\WebApi.csproj.CopyComplete
 C:\Users\Cikada\source\repos\PayGroundBeta\server\Web\obj\Debug\netcoreapp2.1\WebApi.dll
 C:\Users\Cikada\source\repos\PayGroundBeta\server\Web\obj\Debug\netcoreapp2.1\WebApi.pdb
+C:\Users\Cikada\source\repos\PayGroundBeta\server\Web\obj\Debug\netcoreapp2.1\WebApi.RazorTargetAssemblyInfo.cache
+C:\Users\Cikada\source\repos\PayGroundBeta\server\Web\obj\Debug\netcoreapp2.1\WebApi.RazorAssemblyInfo.cache
+C:\Users\Cikada\source\repos\PayGroundBeta\server\Web\obj\Debug\netcoreapp2.1\WebApi.RazorAssemblyInfo.cs
