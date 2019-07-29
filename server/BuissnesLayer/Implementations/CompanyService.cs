@@ -1,5 +1,6 @@
 using BuissnesLayer.Helpers;
 using BuissnesLayer.Interfaces;
+using BuissnesLayer.ModelView;
 using DataLayer;
 using DataLayer.Entityes;
 using System;
@@ -21,7 +22,7 @@ namespace WebApi.Services
         }
 
         
-        
+       
 
         public Company GetById(int id)
         {
@@ -29,15 +30,38 @@ namespace WebApi.Services
         }
 
         
-        public void Add(Company company)
+        public void Add(Company company, CompanyModel companyModel)
         {
             _context.Companies.Add(company);
             _context.SaveChanges();
+            AddImages(companyModel.Images, company.Id);
+
         }
 
        
 
-       
+       public void AddImages(IEnumerable<string> imagies, int comnanyId) {
+
+            foreach(string imageUrl in imagies)
+            {
+
+                var image = new Image()
+                {
+                    ImageUrl = imageUrl
+                };
+                _context.Images.Add( image );
+                _context.SaveChanges();
+                _context.CompanyImages.Add(
+                    new CompanyImage()
+                        {
+                            CompanyId = comnanyId,
+                            ImageId = image.Id
+                        }
+                );
+                _context.SaveChanges();
+            }
+
+       }
 
         
 

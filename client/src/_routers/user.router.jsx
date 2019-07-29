@@ -3,6 +3,7 @@ import {Route, Switch} from "react-router-dom";
 import {RegisterPage} from "../RegisterPage";
 import {LoginPage} from "../LoginPage";
 import {BodyPage} from "../BodyPage";
+import { CampaignPage } from '../_components/CompanyPage/CompanyPage'
 import PrivateRoute from "./PrivateRoute";
 import { CreateCampaignPage } from  '../_components/CreateCompanyPage/CreateCampaignPage'
 

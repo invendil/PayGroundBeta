@@ -9,11 +9,14 @@ namespace BuissnesLayer.ModelView
         public int Id { get; set; }
         
         public string Name { get; set; }
-        public string Category { get; set; }
+        public DateTime FinishTime { get; set; }
+        public string Description { get; set; }
+        public int CategoryId { get; set; }
         public string UrlVideo { get; set; }
         public int GoalMoney { get; set; }
-        public DateTime FinishTime { get; set; }
-        public string DesriptionMD { get; set; }
+
+        public IEnumerable<string> Images { get; set; }
+
 
     }
 }

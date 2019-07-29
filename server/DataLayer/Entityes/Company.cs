@@ -9,7 +9,7 @@ namespace DataLayer.Entityes
         public int Id { get; set; }
         public int UserId { get; set; }
         public string Name { get; set; }
-        public string Category { get; set; }
+        public int CategoryId { get; set; }
         public string UrlVideo { get; set; }
         public int GoalMoney { get; set; }
         public DateTime CreateTime { get; set; }

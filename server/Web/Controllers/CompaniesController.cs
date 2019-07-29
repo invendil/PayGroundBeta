@@ -18,6 +18,7 @@ using BuissnesLayer.Helpers;
 using BuissnesLayer.ModelView;
 using BuissnesLayer.Interfaces;
 using DataLayer.Entityes;
+using BuissnesLayer.Helpers.Mappers;
 
 namespace WebApi.Controllers
 {
@@ -26,17 +27,19 @@ namespace WebApi.Controllers
     [Route("[controller]")]
     public class CompaniesController : Controller
     {
-
+        private ICompanyCategoryService _companyCategoryService;
         private ICompanyService _companyService;
         private IMapper _mapper;
         private readonly AppSettings _appSettings;
 
         public CompaniesController(
+            ICompanyCategoryService companyCategoryService,
             ICompanyService companyService,
             IMapper mapper,
             IOptions<AppSettings> appSettings)
         {
             _companyService = companyService;
+            _companyCategoryService = companyCategoryService;
             _mapper = mapper;
             _appSettings = appSettings.Value;
         }
@@ -48,14 +51,13 @@ namespace WebApi.Controllers
         public IActionResult AddCompany([FromBody]CompanyModel companyModel)
         {
 
-            Console.WriteLine("test ", companyModel);
             // map dto to entity
-            var company = _mapper.Map<Company>(companyModel);
+            var company = CompanyMapper.modelToEntity(companyModel);
 
             try
             {
                 // save 
-                _companyService.Add(company);
+                _companyService.Add(company, companyModel);
                 return Ok();
             }
             catch (AppException ex)
@@ -66,14 +68,26 @@ namespace WebApi.Controllers
         }
 
 
-
-        [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        [AllowAnonymous]
+        [HttpGet("getcategories")]
+        public IActionResult GetCategories()
         {
-            var company = _companyService.GetById(id);
-            var companyModel = _mapper.Map<CompanyModel>(company);
-            return Ok(companyModel);
+
+           
+            var categories = _companyCategoryService.getAll();
+            
+            return Ok(categories);
         }
+
+
+
+        //[HttpGet("{id}")]
+        //public IActionResult GetById(int id)
+        //{
+        //    var company = _companyService.GetById(id);
+        //    var companyModel = _mapper.Map<CompanyModel>(company);
+        //    return Ok(companyModel);
+        //}
 
 
     }

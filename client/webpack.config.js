@@ -2,7 +2,8 @@ var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    entry: './src/index.jsx',
+    entry: ['babel-polyfill','./src/index.jsx'],
+
     output: {
         path: path.resolve('dist'),
         filename: 'bundle.js'
@@ -14,11 +15,11 @@ module.exports = {
     module: {
         loaders: [
             {
-                test: /\.jsx?$/,
-                exclude: /(node_modules|bower_components)/,
+                test: /\.(js|jsx)$/,
+                exclude: /(node_modules)/,
                 loader: 'babel-loader',
                 query: {
-                    presets: ['react', 'es2015', 'stage-3']
+                    presets: ['react', 'es2015', 'stage-0']
                 }
             },
 

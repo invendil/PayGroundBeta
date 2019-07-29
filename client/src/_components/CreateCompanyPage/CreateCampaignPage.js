@@ -2,62 +2,89 @@ import React  from 'react';
 import { Formik } from 'formik';
 import { CreateCampaignForm } from './CreateCampaignForm/component';
 import SimpleMDE from 'simplemde';
-import {companyActions} from "../../_actions";
+import {companyActions, userActions} from "../../_actions";
 import { connect } from 'react-redux';
-
-
+import converter from 'html-to-markdown';
+import {companyConstants} from "../../_constants";
+import {bindActionCreators} from 'redux'
+import { validationSchema } from './validationSchema';
 
 class CreateCampaignPage extends React.Component{
-    constructor(props){
-        super(props);
+
+
+    componentDidMount() {
+        this.props.dispatch(companyActions.getCategories());
     }
 
-    render(){
-        const categoriesArr = ['Games', 'Video', 'Music'];
-        const { dispatch } = this.props;
-        return (
-            <Formik
-                initialValues={{
-                    title: '',
-                    link: '',
-                    category: categoriesArr[0],
-                    goalAmount: 1,
-                    expirationDate: new Date(),
-                    descFieldValue: '## das'
-                }}
-                onSubmit={(values, actions) => {
-                    setTimeout(() => {
-                        let html = SimpleMDE.prototype.markdown(values.descFieldValue);
-                        let company = {
-                            name : values.title,
-                            category : values.category,
-                            urlvideo : values.link,
-                            goalmoney : values.goalAmount,
-                            finishdate : values.expirationDate,
-                            descriptionMD : html
-                        }
-                        this.setState({
-                            company : company
-                        })
-                        dispatch(companyActions.addcompany(company));
-                        document.getElementById('kek').innerHTML = SimpleMDE.prototype.markdown(values.descFieldValue);
 
-                        alert(JSON.stringify(values, null, 2));
-                        actions.setSubmitting(false);
-                    }, 1000);
-                }}
-                render={CreateCampaignForm}
-            />
+    render(){
+
+
+        const { dispatch, companies } = this.props;
+        const { categories } = companies;
+        /*const markdown = converter.convert('<h2> Happy Journey </h2>');
+        alert(markdown);*/
+        return (
+            <div>
+                {companies.loadingCategories && <h1>Loading categories...</h1>}
+                {companies.categories &&
+                    <Formik
+                        initialValues={{
+                            title: '',
+                            link: '',
+                            categoryList: categories ? categories: ['1', '2'],
+                            images: [],
+                            categorySelected : 1,
+                            goalAmount: 1,
+                            expirationDate: new Date(),
+                            descFieldValue: '## das',
+                            images : []
+                        }}
+                        validationSchema={validationSchema}
+                        onSubmit={(values, actions) => {
+
+                            const html =  SimpleMDE.prototype.markdown(values.descFieldValue);
+                            setTimeout(() => {
+                                let html = SimpleMDE.prototype.markdown(values.descFieldValue);
+                                let company = {
+
+                                    urlvideo : values.link ? values.link : "default link",
+                                    goalmoney : values.goalAmount,
+                                    name : values.title ? values.title : "default name",
+                                    categoryid : categories.indexOf(values.categorySelected) +1 ,
+                                    finishtime : values.expirationDate,
+                                    description : html,
+                                    images : values.images
+
+                                }
+                                alert("fsd");
+                                dispatch(companyActions.addCompany(company));
+                                document.getElementById('kek').innerHTML = html;
+                                //alert(htmlToMarkdown(html));
+
+                                //alert(JSON.stringify(company, null, 2));
+                                actions.setSubmitting(false);
+                            }, 1000);
+                        }}
+                        render={CreateCampaignForm}
+                    />
+                }
+            </div>
         );
     }
 };
 
 function mapStateToProps(state) {
+    const {companies} = state;
 
     return {
-        company : state.companies.company
-    };
+        companies: companies
+    }
 }
+
+
+
+
 
 const connected = connect(mapStateToProps)(CreateCampaignPage);
 export { connected as CreateCampaignPage };

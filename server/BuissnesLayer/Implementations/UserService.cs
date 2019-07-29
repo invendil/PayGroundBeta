@@ -66,6 +66,7 @@ namespace WebApi.Services
 
             _context.Users.Add(user);
             _context.SaveChanges();
+            Console.WriteLine("test", user.Id);
 
             return user;
         }

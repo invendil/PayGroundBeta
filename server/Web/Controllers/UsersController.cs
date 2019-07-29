@@ -42,27 +42,7 @@ namespace WebApi.Controllers
 
 
 
-        [AllowAnonymous]
-        [HttpPost("addcompany")]
-        public IActionResult AddCompany([FromBody]CompanyModel companyModel)
-        {
-
-            Console.WriteLine("test ", companyModel);
-            // map dto to entity
-            var company = _mapper.Map<Company>(companyModel);
-
-            try
-            {
-                // save 
-                _companyService.Add(company);
-                return Ok();
-            }
-            catch (AppException ex)
-            {
-                // return error message if there was an exception
-                return BadRequest(ex.Message);
-            }
-        }
+        
 
 
         [AllowAnonymous]

@@ -9,9 +9,12 @@ namespace DataLayer
 {
     public class EFDBContext : DbContext
     {
-        
-        public DbSet<User> Users { get; set; }
+        public DbSet<Image> Images { get; set; }
+        public DbSet<CompanyImage> CompanyImages { get; set; }
+        public DbSet<CompanyCategory> CompanyCategories { get; set; }
         public DbSet<Company> Companies { get; set; }
+        public DbSet<User> Users { get; set; }
+       
         public EFDBContext(DbContextOptions<EFDBContext> options) : base(options) { }
 
     }

@@ -6,13 +6,27 @@ import SimpleMDE from 'react-simplemde-editor';
 import "simplemde/dist/simplemde.min.css";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-
+import { ImageUploader } from './ImageUploader/component';
+import 'easymde/dist/easymde.min.css';
 import YoutubeVideo from './YoutubeForm/component.cs'
-//import ImageUploader from "./ImageUploader/component";
+import Feedback from 'react-bootstrap/Feedback';
+import moment from "moment";
+
+
 const { Option } = Select;
 
 export const CreateCampaignForm = props => {
-    const { handleSubmit, values, errors, handleChange, handleBlur, touched, setFieldValue } = props;
+
+    const {
+        handleSubmit,
+        values,
+        errors,
+        handleChange,
+        handleBlur,
+        touched,
+
+        setFieldValue,
+    } = props;
 
     return (
         <form onSubmit={handleSubmit}>
@@ -41,10 +55,24 @@ export const CreateCampaignForm = props => {
                 description="Choose the category that most closely aligns with your campaign."
                 renderForm={
                     <Form.Group controlId="formBasicSelect">
-                        <Form.Control as="select">
-                            <option>Games</option>
-                            <option>Food</option>
+                        <Form.Control
+                            name="categorySelected"
+                            as="select"
+                            value={values.categorySelected}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                        >
+                            {
+                                values.categoryList.map((item, index) =>
+
+                                    <option key={index} value={item} label={item} />
+                                )
+                            }
+
                         </Form.Control>
+                        <Form.Control.Feedback type="invalid">
+                            {errors.categorySelected}
+                        </Form.Control.Feedback>
                     </Form.Group>
                 }
             />
@@ -52,6 +80,7 @@ export const CreateCampaignForm = props => {
                 title="Campaign video"
                 description="Add a video from YouTube that describes your project."
                 renderForm={
+
                     <YoutubeVideo
                         link={values.link}
                         handleBlur={handleBlur}
@@ -62,11 +91,15 @@ export const CreateCampaignForm = props => {
                 }
             />
             <Section
+                title="Campaign gallery"
+                description="Upload images that most closely capture the essence of your campaign."
+                renderForm={<ImageUploader setFieldValue={setFieldValue} values={values} />}
+            />
+            <Section
                 title="Funding goal"
                 description="Set an achievable goal that covers what you need to complete your campaign."
-
                 renderForm={
-                    <Form.Group controlId="formBasicCompaignGoal">
+                    <Form.Group controlId="formBasicGoal">
                         <InputGroup className="mb-3">
                             <InputGroup.Prepend>
                                 <InputGroup.Text id="basic-addon1">$</InputGroup.Text>
@@ -88,19 +121,19 @@ export const CreateCampaignForm = props => {
             />
             <Section
                 title="Expiration date"
-                description="Set a time limit for your campaign."
-
+                description="Set a time limit for your campaign. You won’t be able to change this after you launch"
                 renderForm={
                     <Form.Group controlId="formBasicDatePicker">
-                        <Form.Label>Datepicker</Form.Label>
                         <DatePicker
+                            className="form-control"
                             name="expirationDate"
+                            minDate={new Date()}
                             selected={values.expirationDate}
-                            onChange={e => setFieldValue('expirationDate', e)}
+                            onChange={e => setFieldValue('expirationDate', new Date(e))}
                         />
-                        <Form.Control.Feedback type="invalid">
-                            {errors.expirationDate}
-                        </Form.Control.Feedback>
+                        <p className="text-danger">
+                            <small>{errors.expirationDate}</small>
+                        </p>
                     </Form.Group>
                 }
             />
