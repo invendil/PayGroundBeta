@@ -19,6 +19,7 @@ using BuissnesLayer.ModelView;
 using BuissnesLayer.Interfaces;
 using DataLayer.Entityes;
 using BuissnesLayer.Helpers.Mappers;
+using BuissnesLayer.Responses;
 
 namespace WebApi.Controllers
 {
@@ -57,8 +58,14 @@ namespace WebApi.Controllers
             try
             {
                 // save 
-                _companyService.Add(company, companyModel);
-                return Ok();
+                company = _companyService.Add(company, companyModel);
+
+                AddCompanyResponse response = new AddCompanyResponse()
+                {
+                    Id = company.Id
+                };
+
+                return Ok(response);
             }
             catch (AppException ex)
             {

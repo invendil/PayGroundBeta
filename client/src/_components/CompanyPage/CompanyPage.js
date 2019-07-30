@@ -5,7 +5,7 @@ import range from 'lodash/range';
 import Carousel from 'react-bootstrap/Carousel'
 import './style.css'
 
-class CampaignPage extends React.Component {
+class CompanyPage extends React.Component {
 
 
     render() {
@@ -53,5 +53,5 @@ class CampaignPage extends React.Component {
         );
     }
 }
-const connected = connect()(CampaignPage);
-export { connected as CampaignPage };
+const connected = connect()(CompanyPage);
+export { connected as CompanyPage };

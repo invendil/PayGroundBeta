@@ -19,9 +19,9 @@ function addCompany(company) {
 
         companyService.add(company)
             .then(
-                () => { 
-                    dispatch(success());
-                    history.push('/create');
+                id => {
+                    dispatch(success(id.id));
+                //    history.push('/companies/create');
                     dispatch(alertActions.success('Company added successful'));
                 },
                 error => {
@@ -32,15 +32,15 @@ function addCompany(company) {
     };
 
     function request(company) { return { type: companyConstants.ADD_REQUEST, company } }
-    function success(company) { return {type: companyConstants.ADD_SUCCESS, company } }
+    function success(createdCompanyId) { return {type: companyConstants.ADD_SUCCESS, createdCompanyId } }
     function failure(error) { return { type: companyConstants.ADD_FAILURE, error } }
 }
 
-function getById() {
+function getById(id) {
     return dispatch => {
         dispatch(request());
 
-        companyService.getById()
+        companyService.getById(id)
             .then(
                 company => dispatch(success(company)),
                 error => dispatch(failure(error))

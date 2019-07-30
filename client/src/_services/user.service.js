@@ -50,7 +50,7 @@ function getById(id) {
         headers: authHeader()
     };
 
-    return fetch(config.apiUrl + '/users/' + _id, requestOptions).then(handleResponse, handleError);
+    return fetch(config.apiUrl + '/users/' + id, requestOptions).then(handleResponse, handleError);
 }
 
 function register(user) {

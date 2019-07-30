@@ -30,11 +30,12 @@ namespace WebApi.Services
         }
 
         
-        public void Add(Company company, CompanyModel companyModel)
+        public Company Add(Company company, CompanyModel companyModel)
         {
             _context.Companies.Add(company);
             _context.SaveChanges();
             AddImages(companyModel.Images, company.Id);
+            return company;
 
         }
 

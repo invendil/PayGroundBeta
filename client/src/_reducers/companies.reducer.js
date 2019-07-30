@@ -11,7 +11,7 @@ export function companies(state = {}, action) {
     case companyConstants.ADD_SUCCESS:
         return {
             ...state,
-            createdCompany : action.company,
+            createdCompanyId : action.createdCompanyId,
             addingCompany: false
         };
     case companyConstants.ADD_FAILURE:

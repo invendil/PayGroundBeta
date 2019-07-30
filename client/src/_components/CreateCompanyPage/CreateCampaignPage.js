@@ -4,12 +4,14 @@ import { CreateCampaignForm } from './CreateCampaignForm/component';
 import SimpleMDE from 'simplemde';
 import {companyActions, userActions} from "../../_actions";
 import { connect } from 'react-redux';
+import {history} from '../../_helpers/history'
 import converter from 'html-to-markdown';
 import {companyConstants} from "../../_constants";
 import {bindActionCreators} from 'redux'
 import { validationSchema } from './validationSchema';
+import {Redirect} from "react-router-dom";
 
-class CreateCampaignPage extends React.Component{
+class CreateCompanyPage extends React.Component{
 
 
     componentDidMount() {
@@ -21,11 +23,12 @@ class CreateCampaignPage extends React.Component{
 
 
         const { dispatch, companies } = this.props;
-        const { categories } = companies;
+        const { categories, createdCompanyId } = companies;
         /*const markdown = converter.convert('<h2> Happy Journey </h2>');
         alert(markdown);*/
         return (
             <div>
+                {companies.createdCompanyId ? <Redirect to={`/companies/${companies.createdCompanyId}`}/> : null}
                 {companies.loadingCategories && <h1>Loading categories...</h1>}
                 {companies.categories &&
                     <Formik
@@ -40,7 +43,7 @@ class CreateCampaignPage extends React.Component{
                             descFieldValue: '## das',
                             images : []
                         }}
-                        validationSchema={validationSchema}
+                        /*validationSchema={validationSchema}*/
                         onSubmit={(values, actions) => {
 
                             const html =  SimpleMDE.prototype.markdown(values.descFieldValue);
@@ -57,7 +60,7 @@ class CreateCampaignPage extends React.Component{
                                     images : values.images
 
                                 }
-                                alert("fsd");
+
                                 dispatch(companyActions.addCompany(company));
                                 document.getElementById('kek').innerHTML = html;
                                 //alert(htmlToMarkdown(html));
@@ -86,5 +89,5 @@ function mapStateToProps(state) {
 
 
 
-const connected = connect(mapStateToProps)(CreateCampaignPage);
-export { connected as CreateCampaignPage };
+const connected = connect(mapStateToProps)(CreateCompanyPage);
+export { connected as CreateCompanyPage };

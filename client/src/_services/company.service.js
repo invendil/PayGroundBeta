@@ -3,7 +3,7 @@ import { authHeader, config } from '../_helpers';
 export const companyService = {
     add,
 
-
+    getById,
     getCategories
 
 
@@ -21,7 +21,14 @@ function getCategories() {
 
     return fetch(config.apiUrl + '/companies/getcategories' , requestOptions).then(handleResponse, handleError);
 }
+function getById(id) {
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader()
+    };
 
+    return fetch(config.apiUrl + '/companies/' + id, requestOptions).then(handleResponse, handleError);
+}
 
 function add(company) {
     const requestOptions = {
