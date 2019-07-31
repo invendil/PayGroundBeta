@@ -23,7 +23,7 @@
     "idempotent-babel-polyfill": "^7.4.4",
     "jquery": "^3.4.1",
     "moment": "^2.24.0",
-    "prop-types": "latest",
+    "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-bootstrap": "^1.0.0-beta.10",
     "react-datepicker": "latest",

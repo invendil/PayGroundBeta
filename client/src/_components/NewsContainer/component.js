@@ -4,65 +4,62 @@ import {NewsComponent} from "./NewsComponent/component";
 import './style.css'
 import {NewsCreateComponent} from "./NewsCreateComponent/component";
 import { Modal, Button } from 'antd';
-import newsActions from './actions'
+import { newsActions } from './actions'
 class NewsContainer extends React.Component {
 
     constructor(props){
         super(props);
         this.state = {
-            news : [
-                {
-                    time : '05/07/2019',
-                    title : 'Title',
-                    textBody : '<h3>Text body</h3>'
-                },
-                {
-                    time : '05/07/2019',
-                    title : 'Title',
-                    textBody : '<h3>Text body</h3>'
-                },
-                {
-                    time : '05/07/2019',
-                    title : 'Title',
-                    textBody : '<h3>Text body</h3>'
-                },
-                {
-                    time : '05/07/2019',
-                    title : 'Title',
-                    textBody : '<h3>Text body</h3>'
-                }
-            ],
-            visible: this.props.isNewsEditing
-        }
+
+            editNewsId : -1,
+            editNews : {
+                time : '',
+                title : '',
+                bodyHtml : ''
+            },
+            isNewsEditing: false
+        };
+        this.putNewsToEdit =  this.putNewsToEdit.bind(this);
+
     }
 
 
 
     showModal = () => {
         this.setState({
-            visible: true,
+            editNewsId : -1,
         });
+
+       this.props.dispatch( newsActions.startAddNews(this.props.news.newsList) );
     };
 
-    handleModelOk = e => {
-        console.log(e);
+    // handleModelOk = e => {
+    //     console.log(e);
+    //     this.setState({
+    //         visible: false,
+    //     });
+    // };
+    //
+    // handleCancel = e => {
+    //     console.log(e);
+    //     this.setState({
+    //         isNewsEditing: false,
+    //     });
+    // };
+
+
+    putNewsToEdit(editNews, id){
+        console.log("New edit id: ", id);
         this.setState({
-            visible: false,
+            editNewsId : id,
+            editNews : editNews
         });
-    };
-
-    handleCancel = e => {
-        console.log(e);
-        this.setState({
-            visible: false,
-        });
-    };
-
-
-
+        this.props.dispatch( newsActions.startAddNews(this.props.news.newsList) );
+    }
 
     render() {
-
+        const {editNews,editNewsId } = this.state;
+        const {news, companyId} = this.props;
 
         return (
             <div className="news-form">
@@ -71,15 +68,20 @@ class NewsContainer extends React.Component {
                     Add
                 </button>
 
-                <NewsCreateComponent/>
+                {news.isNewsEditing ? <NewsCreateComponent editNews={editNews} editNewsId={editNewsId} companyId={companyId}/> : null}
 
-                {this.state.news.map((item, index)=>{
+                {news.newsList ? news.newsList.map((item, index)=>{
 
                     return(
-                        <NewsComponent id={{index}+'News'} key={index} title={item.title} textBody={item.textBody} time={item.time}/>
+                        <NewsComponent
+                            id={index}
+                            key={index}
+                            news = {item}
+
+                            putNewsToEdit={this.putNewsToEdit}/>
                     );
 
-                })}
+                }) : null}
             </div>
 
         );
@@ -90,10 +92,11 @@ function mapStateToProps(state) {
     const {news} = state;
 
     return {
-        news: news
+        news: news,
+        companyId : 12
     }
 }
 
 
-const connected = connect()(NewsContainer);
+const connected = connect(mapStateToProps)(NewsContainer);
 export { connected as NewsContainer };

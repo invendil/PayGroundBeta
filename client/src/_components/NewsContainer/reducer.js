@@ -1,27 +1,37 @@
-import { constants } from './constants';
+import {newsConstants}  from './constants';
 
 export function news(state = {}, action) {
-  switch (action.type) {
-      case constants.START_EDITING:
-      return {
-          ...state,
-          isNewsEditing: true
-      };
 
-      case constants.CANCEL_EDITING:
+  switch (action.type) {
+      case newsConstants.START_EDITING:
+
+
+              return {
+                  ...state,
+                  newsList : action.newsList,
+                  isNewsEditing: true
+              };
+
+
+
+      case newsConstants.CANCEL_EDITING:
           return {
               ...state,
               isNewsEditing: false
           };
 
-      case constants.CANCEL_EDITING:
-          return {
-              ...state,
-              isNewsEditing: false,
-              newPost : action.newPost
-          };
+      case newsConstants.CONFIRM_EDITING:
 
-      case constants.DELETE_NEW_POST:
+              return {
+                  ...state,
+                  isNewsEditing: false,
+                  newsList : action.newsList
+
+              };
+
+
+
+      case newsConstants.DELETE_NEW_POST:
           return {
               ...state,
 

@@ -1,6 +1,7 @@
-import constants from './constants'
+import {newsConstants} from './constants'
+import {postService} from '../../_services'
 
-export default  actions = {
+export const  newsActions = {
     cancelAddNews,
     startAddNews,
     confirmAddNews,
@@ -8,32 +9,40 @@ export default  actions = {
 
 };
 
+function startAddNews(newsList) {
+    return dispatch => {
+        dispatch(request(newsList ? newsList : []));
+
+
+    };
+    function request(newsList) { return { type: newsConstants.START_EDITING, newsList : newsList} }
+
+}
+
 function cancelAddNews() {
     return dispatch => {
         dispatch(request());
 
 
     };
-    function request() { return { type: constants.START_EDITING} }
+    function request() { return { type: newsConstants.CANCEL_EDITING} }
 
 }
-
-function startAddNews() {
+function confirmAddNews(news, editNewsId, newsList) {
     return dispatch => {
-        dispatch(request());
+        if (editNewsId === -1){
+            postService.add(news);
+            newsList = [news, ...newsList];
+        } else {
+            postService.update(news);
+            newsList[editNewsId] = news;
+        }
+        dispatch(request(newsList));
 
 
     };
-    function request() { return { type: constants.CANCEL_EDITING} }
-
-}
-function confirmAddNews(news) {
-    return dispatch => {
-        dispatch(request(news));
-
-
-    };
-    function request(news) { return { type: constants.START_EDITING, newPost : news} }
+    function request(newsList) { return { type: newsConstants.CONFIRM_EDITING,  newsList: newsList };
+    }
 
 }
 
@@ -43,7 +52,7 @@ function deleteNewPostFromStore() {
 
 
     };
-    function request() { return { type: constants.DELETE_NEW_POST} }
+    function request() { return { type: newsConstants.DELETE_NEW_POST} }
 
 }
 

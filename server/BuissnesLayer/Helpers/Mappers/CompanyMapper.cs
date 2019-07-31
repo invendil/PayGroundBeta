@@ -9,7 +9,7 @@ namespace BuissnesLayer.Helpers.Mappers
     public class CompanyMapper
     {
 
-        public static Company modelToEntity(CompanyModel companyModel)
+        public static Company ModelToEntity(CompanyModel companyModel)
         {
             Company company = new Company()
             {
@@ -17,7 +17,7 @@ namespace BuissnesLayer.Helpers.Mappers
                 CategoryId = companyModel.CategoryId,
                 GoalMoney = companyModel.GoalMoney,
                 UrlVideo = companyModel.UrlVideo,
-                CreateTime = DateTime.Now,
+                CreateTime = companyModel.CreateTime != DateTime.MinValue ? companyModel.CreateTime : DateTime.Now,
                 FinishTime = companyModel.FinishTime,
                 DesriptionMD = !String.IsNullOrEmpty(companyModel.Description) ? companyModel.Description : "no desc",
                 UserId = 1

@@ -53,7 +53,7 @@ namespace WebApi.Controllers
         {
 
             // map dto to entity
-            var company = CompanyMapper.modelToEntity(companyModel);
+            var company = CompanyMapper.ModelToEntity(companyModel);
 
             try
             {
