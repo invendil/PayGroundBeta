@@ -57,7 +57,7 @@ function add(company) {
     const requestOptions = {
         method: 'POST',
         headers: { ...authHeader(), 'Content-Type': 'application/json' },
-        body: JSON.stringify(company, user)
+        body: JSON.stringify(company)
     };
 
     return fetch(config.apiUrl + '/companies/addcompany', requestOptions).then(handleResponse, handleError);

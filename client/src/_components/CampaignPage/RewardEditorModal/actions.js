@@ -48,12 +48,13 @@ export const updateRewardRequest = data => dispatch =>
 export const createRewardRequest = data => dispatch =>
     new Promise(function(resolve, reject) {
         dispatch({ type: CREATE_REWARD });
-
+        console.log("test create reward");
         rewardService.add(data)
-            .then(reward => {
-                dispatch(createRewardSuccess(reward.id));
-                dispatch(addReward(reward));
-                resolve(reward.id);
+            .then(
+                reward => {
+                    dispatch(createRewardSuccess(reward.id));
+                    dispatch(addReward(reward));
+                    resolve(reward.id);
             },
                 err => {
                     dispatch(createRewardFail(err));

@@ -10,21 +10,23 @@ export const rewardService = {
 
 };
 
-function update(reward) {
+function update(data) {
     let user = JSON.parse(localStorage.getItem('user'));
 
-    reward ={
-        ...reward,
+    data ={
+        ...data,
+        id : data.rewardId,
+        companyId : data.id,
         username: user.username
     }
-    console.log("reward", reward);
+    console.log("reward", data);
     const requestOptions = {
         method: 'PUT',
         headers: { ...authHeader(), 'Content-Type': 'application/json' },
-        body: JSON.stringify(reward)
+        body: JSON.stringify(data)
     };
 
-    return fetch(config.apiUrl + '/rewards/' + reward.id, requestOptions).then(handleResponse, handleError);
+    return fetch(config.apiUrl + '/rewards/' + data.companyId, requestOptions).then(handleResponse, handleError);
 }
 
 
@@ -38,18 +40,20 @@ function getById(id) {
     return fetch(config.apiUrl + '/rewards/' + id, requestOptions).then(handleResponse, handleError);
 }
 
-function add(reward) {
+function add(data) {
     let user = JSON.parse(localStorage.getItem('user'));
 
-    reward ={
-        ...reward,
+    data ={
+        ...data,
+        id : data.rewardId,
+        companyId : data.id,
         username: user.username
     }
-    console.log("reward", reward);
+    console.log("reward", data);
     const requestOptions = {
         method: 'POST',
         headers: { ...authHeader(), 'Content-Type': 'application/json' },
-        body: JSON.stringify(reward)
+        body: JSON.stringify(data)
     };
 
     return fetch(config.apiUrl + '/rewards/addreward', requestOptions).then(handleResponse, handleError);
@@ -65,14 +69,17 @@ function getAllByCompanyId(companyId) {
 }
 
 
-function _delete(id) {
+function _delete(data) {
+
+
     const requestOptions = {
         method: 'DELETE',
         headers: authHeader(),
+        body: JSON.stringify(data.rewardId)
 
     };
 
-    return fetch(config.apiUrl + '/rewards/' + id, requestOptions).then(handleResponse, handleError);
+    return fetch(config.apiUrl + '/rewards/' + data.rewardId, requestOptions).then(handleResponse, handleError);
 }
 function handleResponse(response) {
     return new Promise((resolve, reject) => {

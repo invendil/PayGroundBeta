@@ -51,7 +51,7 @@ class RewardEditorModal extends Component {
                               }
                             : {
                                   name: reward ? reward.name : '',
-                                  description: reward ? reward.description : '',
+                                  description: reward ? reward.descriptiondescription : '',
                                   amount: reward ? reward.amount : '',
                               }
                     }

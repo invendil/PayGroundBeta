@@ -8,6 +8,7 @@ const mapStateToProps = state => ({
     campaign: state.campaignPageReducer.campaign,
     isLoading: state.createRewardReducer.isLoading,
     error: state.createRewardReducer.error,
+    isAuthorized : state.authentication.isAuthorized,
 });
 
 const mapDispatchToProps = () => ({

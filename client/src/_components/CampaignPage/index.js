@@ -9,6 +9,7 @@ const mapStateToProps = state => ({
     campaign: state.campaignPageReducer.campaign,
     error: state.campaignPageReducer.error,
     user: state.authentication.user,
+    isAuthorized : state.authentication.isAuthorized,
     isDeleted: state.campaignPageReducer.isDeleted,
 });
 

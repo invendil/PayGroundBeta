@@ -39,7 +39,7 @@ namespace WebApi.Controllers
 
 
 
-        [AllowAnonymous]
+        
         [HttpPost("addreward")]
         public IActionResult AddReward([FromBody]RewardModel rewardModel)
         {
@@ -103,10 +103,10 @@ namespace WebApi.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(int delId)
+        public IActionResult Delete(int id)
         {
-            _rewardService.Delete(delId);
-            return Ok(new { deletedId = delId });
+            _rewardService.Delete(id);
+            return Ok(new { deletedId = id });
         }
 
 

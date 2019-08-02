@@ -9,7 +9,7 @@ const mapStateToProps = state => ({
     isLoading: state.rewardsReducer.isLoading,
     rewards: selectRewardsSortedByAmount(state),
     error: state.rewardsReducer.error,
-    isAuthorized: state.user.isAuthorized,
+    isAuthorized : state.authentication.isAuthorized,
 });
 
 const mapDispatchToProps = () => ({
