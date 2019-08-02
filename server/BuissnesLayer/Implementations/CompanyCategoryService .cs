@@ -5,7 +5,7 @@ using DataLayer.Entityes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using Microsoft.EntityFrameworkCore;
 
 namespace WebApi.Services
 {
@@ -21,9 +21,9 @@ namespace WebApi.Services
         }
         
 
-        public IEnumerable<string> getAll()
+        public IEnumerable<CompanyCategory> getAll()
         {
-            return _context.CompanyCategories.Select(x => x.Name);
+            return _context.CompanyCategories;
         }
 
         public int getByName(string name)

@@ -10,13 +10,15 @@ namespace DataLayer
     public class EFDBContext : DbContext
     {
         public DbSet<Image> Images { get; set; }
-        public DbSet<CompanyImage> CompanyImages { get; set; }
+        public DbSet<Reward> Rewards { get; set; }
+        public DbSet<Like> Likes { get; set; }
         public DbSet<CompanyCategory> CompanyCategories { get; set; }
         public DbSet<Company> Companies { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<Comment> Comments { get; set; }
-        public DbSet<UserComment> UserComments { get; set; }
+        
         public EFDBContext(DbContextOptions<EFDBContext> options) : base(options) { }
 
     }

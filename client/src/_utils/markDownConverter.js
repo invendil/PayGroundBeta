@@ -1,6 +1,7 @@
 import moment from 'moment-es6';
 import SimpleMDE from 'simplemde';
 import ReactHtmlParser from "react-html-parser";
+import converter from 'html-to-markdown';
 
 export const markDownHtmlConverter = {
     markDownToHtml,
@@ -12,5 +13,5 @@ function markDownToHtml (date) {
     return SimpleMDE.prototype.markdown(date);
 };
 function htmlToMarkDown (date) {
-    return ReactHtmlParser(date) ;
+    return converter.convert(date) ;
 };

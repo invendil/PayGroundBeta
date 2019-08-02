@@ -11,8 +11,7 @@ export const postService = {
 function getAll(companyId) {
     const requestOptions = {
         method: 'GET',
-        headers: authHeader(),
-        body: JSON.stringify(companyId)
+        headers: authHeader()
     };
 
     return fetch(config.apiUrl + '/posts/getallbycompany/'+companyId, requestOptions).then(handleResponse, handleError);
@@ -36,7 +35,7 @@ function update(post) {
         body: JSON.stringify(post)
     };
 
-    return fetch(config.apiUrl + '/posts/' + post.id, requestOptions).then(handleResponse, handleError);
+    return fetch(config.apiUrl + '/posts/update' , requestOptions).then(handleResponse, handleError);
 }
 
 // prefixed function name with underscore because delete is a reserved word in javascript

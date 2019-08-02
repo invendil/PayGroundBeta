@@ -5,7 +5,7 @@ using DataLayer.Entityes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using Microsoft.EntityFrameworkCore;
 
 namespace WebApi.Services
 {
@@ -60,7 +60,7 @@ namespace WebApi.Services
             }
             catch
             {
-                return;
+                throw new AppException("Update failed!");
             }
 
            

@@ -24,37 +24,45 @@ using BuissnesLayer.Responses;
 namespace WebApi.Controllers
 {
 
-    [Authorize]
+    
     [Route("[controller]")]
     public class CompaniesController : Controller
     {
         private ICompanyCategoryService _companyCategoryService;
         private ICompanyService _companyService;
+        private IUserService _userService;
         private IMapper _mapper;
         private readonly AppSettings _appSettings;
 
         public CompaniesController(
             ICompanyCategoryService companyCategoryService,
             ICompanyService companyService,
+            IUserService userService,
             IMapper mapper,
             IOptions<AppSettings> appSettings)
         {
             _companyService = companyService;
             _companyCategoryService = companyCategoryService;
+            _userService = userService;
             _mapper = mapper;
             _appSettings = appSettings.Value;
         }
 
 
 
-        [AllowAnonymous]
+        [Authorize(Roles = "USER")]
         [HttpPost("addcompany")]
         public IActionResult AddCompany([FromBody]CompanyModel companyModel)
         {
+            var user = _userService.GetByUsername(companyModel.Username);
 
+            if (user == null)
+                return BadRequest("Bad user!");
             // map dto to entity
+            
+            companyModel.CurrentMoney = 0;
             var company = CompanyMapper.ModelToEntity(companyModel);
-
+            company.User = user;
             try
             {
                 // save 
@@ -87,15 +95,48 @@ namespace WebApi.Controllers
         }
 
 
+        [AllowAnonymous]
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            var company = _companyService.GetById(id);
+            
+            UserModel userModelCompany = _mapper.Map<UserModel>(company.User);
+            
+            var companyModel = CompanyMapper.EntityToModel(company);
+            companyModel.Images = company.Images.Select(x => x.ImageUrl);
+            companyModel.User = userModelCompany;
+            return Ok(companyModel);
+        }
 
-        //[HttpGet("{id}")]
-        //public IActionResult GetById(int id)
-        //{
-        //    var company = _companyService.GetById(id);
-        //    var companyModel = _mapper.Map<CompanyModel>(company);
-        //    return Ok(companyModel);
-        //}
 
+        [HttpPut("{id}")]
+        public IActionResult Update(int id, [FromBody]CompanyModel companyModel)
+        {
+            // map dto to entity and set id
+            var company = CompanyMapper.ModelToEntity(companyModel);
+            
 
+            try
+            {
+                // save 
+                _companyService.Update(company, companyModel);
+                return Ok(new{ id = company.Id});
+            }
+            catch (AppException ex)
+            {
+                // return error message if there was an exception
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            _companyService.Delete(id);
+            return Ok();
+        }
+
+        
     }
 }

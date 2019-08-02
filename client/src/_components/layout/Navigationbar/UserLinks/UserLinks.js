@@ -2,7 +2,7 @@ import React from 'react';
 import { Avatar } from 'antd';
 import { Dropdown } from 'react-bootstrap';
 import './style.css';
-import { PropTypes } from 'prop-types';
+import PropTypes  from 'prop-types';
 import {Link} from "react-router-dom";
 
 class CustomToggle extends React.Component {

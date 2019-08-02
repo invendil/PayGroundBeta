@@ -10,6 +10,8 @@ import getLeftDays from '../../_utils/getLeftDays';
 import { Link } from 'react-router-dom';
 import DeleteModal from './DeleteModal/component';
 import {Redirect} from "react-router-dom";
+import RewardEditorModal from "./RewardEditorModal";
+import RewardSection from "./RewardsSection";
 
 const { confirm } = Modal;
 const { TabPane } = Tabs;
@@ -23,7 +25,7 @@ class CampaignPage extends Component {
     }
 
     render() {
-        const { campaign, user, deleteCampaign, isLoading, error, isDeleted } = this.props;
+        const { campaign, user, deleteCampaign, isLoading, error, isDeleted, match } = this.props;
         const isUserCreator = campaign.user && user && user.id === campaign.user.id;
         console.log(campaign);
 
@@ -46,8 +48,8 @@ class CampaignPage extends Component {
                                 <Carousel.Item>
                                     <YouTube
                                         videoId={
-                                            campaign.urlvideo
-                                                ? getVideoId(campaign.urlvideo)
+                                            campaign.urlVideo
+                                                ? getVideoId(campaign.urlVideo)
                                                 : null
                                         }
                                         opts={{
@@ -98,7 +100,7 @@ class CampaignPage extends Component {
                             {isUserCreator && (
                                 <div className="d-flex justify-content-between mt-5">
                                     <Link
-                                        to={`/campaign/edit/${
+                                        to={`/companies/edit/${
                                             campaign.id ? campaign.id : null
                                         }`}
                                         className="btn btn-outline-success w-25"
@@ -129,10 +131,9 @@ class CampaignPage extends Component {
                                             Select reward
                                         </h4>
                                         {isUserCreator && (
-                                            <Button variant="outline-success w-100 mb-3">
-                                                Add new reward
-                                            </Button>
+                                            <RewardEditorModal id={match.params.id} isCreating="true"/>
                                         )}
+                                        <RewardSection id={match.params.id} isUserCreator={isUserCreator}/>
                                     </Col>
                                 </Row>
                             </Container>

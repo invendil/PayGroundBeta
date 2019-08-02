@@ -48,7 +48,7 @@ class NavigationBar extends React.Component{
 function mapStateToProps(state) {
 
     return {
-        isAuthorized: state.authentication.loggedIn
+        isAuthorized: state.authentication.isAuthorized
     };
 }
 

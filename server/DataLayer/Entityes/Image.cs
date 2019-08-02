@@ -7,7 +7,7 @@ namespace DataLayer.Entityes
     public class Image
     {
         public int Id { get; set; }
-        
+        public Company Company { get; set; }
         public string ImageUrl { get; set; }
         
 

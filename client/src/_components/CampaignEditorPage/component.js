@@ -64,8 +64,8 @@ class CampaignEditorPage extends React.Component {
                             ? {
                                   title: campaign.name,
                                   category:
-                                      campaign.category && !isCreating
-                                          ? campaign.category.name
+                                      campaign.categoryId && !isCreating
+                                          ? categories[campaign.categoryId - 1]
                                           : '',
 
                                   description: markDownHtmlConverter.htmlToMarkDown(campaign.description),
@@ -86,6 +86,7 @@ class CampaignEditorPage extends React.Component {
                     }
                    // validationSchema={validationSchema}
                     onSubmit={(values, actions) => {
+                        console.log("category", values.category);
                         const html = markDownHtmlConverter.markDownToHtml(values.description);
                         const company = {
 
@@ -103,10 +104,8 @@ class CampaignEditorPage extends React.Component {
                             console.log('cr');
                             createCampaign(company);
                         } else {
-                            updateCampaign({
-                                id: campaign.id,
-                                updateInfo: { ...values },
-                            });
+                            updateCampaign( campaign
+                            );
                         }
                         actions.setSubmitting(false);
                     }}

@@ -11,8 +11,9 @@ namespace BuissnesLayer.Interfaces
 
         Company Add(Company company, CompanyModel companyModel);
         Company GetById(int id);
-        
-        
-        
+        IEnumerable<Image> GetImagesByCompanyId(int id);
+        void Update(Company company, CompanyModel companyModel);
+        void Delete(int id);
+
     }
 }

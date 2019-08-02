@@ -5,7 +5,7 @@ using DataLayer.Entityes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using Microsoft.EntityFrameworkCore;
 
 namespace WebApi.Services
 {
@@ -25,7 +25,9 @@ namespace WebApi.Services
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
                 return null;
 
-            var user = _context.Users.SingleOrDefault(x => x.Username == username);
+            var user = _context.Users
+                .Include(x => x.Role)
+                .SingleOrDefault(x => x.Username == username);
 
             // check if username exists
             if (user == null)
@@ -41,14 +43,21 @@ namespace WebApi.Services
 
         public IEnumerable<User> GetAll()
         {
-            return _context.Users;
+            return _context.Users.Include(x => x.Role);
         }
 
         public User GetById(int id)
         {
-            return _context.Users.Find(id);
+            return _context.Users
+                .Include(x => x.Role)
+                .FirstOrDefault(x => x.Id == id);
         }
-
+        public User GetByUsername(string username)
+        {
+            return _context.Users
+                .Include(x => x.Role)
+                .FirstOrDefault(x => x.Username == username);
+        }
         public User Create(User user, string password)
         {
             // validation
@@ -60,7 +69,7 @@ namespace WebApi.Services
 
             byte[] passwordHash, passwordSalt;
             CreatePasswordHash(password, out passwordHash, out passwordSalt);
-
+            user.RoleId = 1;
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
 
@@ -114,7 +123,16 @@ namespace WebApi.Services
             }
         }
 
+
+        public string GetRoleNameById(int id)
+        {
+            return _context.UserRoles.Find(id).Name;
+        }
+
+
         // private helper methods
+
+
 
         private static void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {

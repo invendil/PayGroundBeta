@@ -7,7 +7,7 @@ class CommentsContainer extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            news : [
+            posts : [
                 {
                     title : 'Title1',
                     text : 'd;flkads;flaksd;flkasdf;lkasd;fldkf;alsdkfa;sldkfgkjhkdjjsd'
@@ -33,7 +33,7 @@ class CommentsContainer extends React.Component {
 
         return (
             <div className="news-form">
-                {this.state.news.map((item, index)=>{
+                {this.state.posts.map((item, index)=>{
 
                     return(
                         <  NewsComponent key={index} title={item.title} text={item.text} />

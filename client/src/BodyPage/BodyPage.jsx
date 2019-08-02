@@ -29,9 +29,9 @@ class BodyPage extends React.Component {
 }
 
 function mapStateToProps(state) {
-    const { loggingIn } = state.authentication;
+    const { isLoggingIn } = state.authentication;
     return {
-        loggingIn,
+        isLoggingIn,
         user : state.user
     };
 }

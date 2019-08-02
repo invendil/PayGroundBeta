@@ -13,6 +13,7 @@ namespace BuissnesLayer.Helpers.Mappers
         {
             Company company = new Company()
             {
+                Id = companyModel.Id,
                 Name = companyModel.Name,
                 CategoryId = companyModel.CategoryId,
                 GoalMoney = companyModel.GoalMoney,
@@ -20,13 +21,34 @@ namespace BuissnesLayer.Helpers.Mappers
                 CreateTime = companyModel.CreateTime != DateTime.MinValue ? companyModel.CreateTime : DateTime.Now,
                 FinishTime = companyModel.FinishTime,
                 DesriptionMD = !String.IsNullOrEmpty(companyModel.Description) ? companyModel.Description : "no desc",
-                UserId = 1
+                
+                CurrentMoney = companyModel.CurrentMoney
 
             };
 
            
 
             return company;
+        }
+        public static CompanyModel EntityToModel(Company company)
+        {
+            CompanyModel companyModel = new CompanyModel()
+            {
+                Id = company.Id,
+                Name = company.Name,
+                CategoryId = company.CategoryId,
+                GoalMoney = company.GoalMoney,
+                UrlVideo = company.UrlVideo,
+                CreateTime = company.CreateTime,
+                FinishTime = company.FinishTime,
+                Description = company.DesriptionMD,
+                UserId = company.User.Id,
+                CurrentMoney = company.CurrentMoney
+            };
+
+
+
+            return companyModel;
         }
     }
 }

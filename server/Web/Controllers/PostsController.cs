@@ -26,14 +26,14 @@ namespace WebApi.Controllers
 {
     [Authorize]
     [Route("[controller]")]
-    public class PostController : Controller
+    public class PostsController : Controller
     {
 
         private ICompanyService _companyService;
         private IPostService _postService;
         private readonly AppSettings _appSettings;
 
-        public PostController(
+        public PostsController(
 
             ICompanyService companyService,
              IPostService postService,
@@ -49,7 +49,7 @@ namespace WebApi.Controllers
 
 
         [AllowAnonymous]
-        [HttpPost("addcompany")]
+        [HttpPost("add")]
         public IActionResult AddPost([FromBody]PostModel postModel)
         {
 
@@ -79,7 +79,7 @@ namespace WebApi.Controllers
         {
 
 
-            var posts = _postService.GetAll(id);
+            IEnumerable<Post> posts = _postService.GetAll(id);
 
             return Ok(posts);
         }
@@ -104,12 +104,12 @@ namespace WebApi.Controllers
 
         }
 
-        [HttpPut("{id}")]
-        public IActionResult Update(int id, [FromBody]PostModel postModel)
+        [HttpPut("update")]
+        public IActionResult Update([FromBody]PostModel postModel)
         {
             // map dto to entity and set id
             var post = PostMapper.ModelToEntity(postModel);
-            post.Id = id;
+            post.Id = postModel.Id;
 
             try
             {
