@@ -1,7 +1,7 @@
 import {postConstants} from './constants'
-import {postService, userService} from '../../_services'
-import {alertActions} from "../../_actions";
-import {userConstants} from "../../_constants";
+import {postService, userService} from '../../../_services/index'
+import {alertActions} from "../../../_actions/index";
+import {userConstants} from "../../../_constants/index";
 
 export const  postActions = {
     cancelAddPost,

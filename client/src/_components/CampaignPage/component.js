@@ -12,6 +12,7 @@ import DeleteModal from './DeleteModal/component';
 import {Redirect} from "react-router-dom";
 import RewardEditorModal from "./RewardEditorModal";
 import RewardSection from "./RewardsSection";
+import CommentContainer from "./CommentsContainer"
 
 const { confirm } = Modal;
 const { TabPane } = Tabs;
@@ -25,6 +26,7 @@ class CampaignPage extends Component {
     }
 
     render() {
+
         const { campaign, user, deleteCampaign, isLoading, error, isDeleted, match } = this.props;
         const isUserCreator = campaign.user && user && user.id === campaign.user.id;
         console.log(campaign);
@@ -131,18 +133,22 @@ class CampaignPage extends Component {
                                             Select reward
                                         </h4>
                                         {isUserCreator && (
-                                            <RewardEditorModal id={match.params.id} isCreating="true"/>
+                                            <RewardEditorModal id={Number(match.params.id)} isCreating="true"/>
                                         )}
-                                        <RewardSection id={match.params.id} isUserCreator={isUserCreator}/>
+                                        <RewardSection id={Number(match.params.id)} isUserCreator={isUserCreator}/>
                                     </Col>
                                 </Row>
                             </Container>
                         </TabPane>
                         <TabPane tab="News" key="2">
-                            123
+                           123
                         </TabPane>
                         <TabPane tab="Comments" key="3">
-                            321
+                            <CommentContainer
+                                id={Number(match.params.id) }
+                                isUserCreator = {isUserCreator}
+
+                            />
                         </TabPane>
                     </Tabs>
                 </div>

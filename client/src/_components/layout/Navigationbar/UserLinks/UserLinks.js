@@ -37,7 +37,7 @@ export const UserLinks = props => {
                 <Dropdown.Item as={Link} to='/companies/create' >
                     New campaign
                 </Dropdown.Item>
-                <Dropdown.Item eventKey="2">Profile</Dropdown.Item>
+                <Dropdown.Item eventKey="2" as={Link} to='/profile'>Profile</Dropdown.Item>
                 <Dropdown.Divider />
                 <Dropdown.Item
                     as={Link} to='/login'

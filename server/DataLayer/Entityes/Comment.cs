@@ -8,7 +8,10 @@ namespace DataLayer.Entityes
     {
         public int Id { get; set; }
         public int CompanyId { get; set; }
+        public Company Company { get; set; }
+
         public int UserId { get; set; }
+        public User User { get; set; }
         public string Body { get; set; }
         
         public DateTime CreateTime { get; set; }

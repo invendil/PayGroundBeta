@@ -74,6 +74,7 @@ namespace WebApi
             services.AddScoped<IPostService, PostService>();
             services.AddScoped<ICompanyCategoryService, CompanyCategoryService>();
             services.AddScoped<IRewardService, RewardService>();
+            services.AddScoped<ICommentService, CommentService>();
 
         }
 

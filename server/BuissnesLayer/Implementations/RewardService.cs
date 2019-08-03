@@ -42,7 +42,9 @@ namespace WebApi.Services
 
             if (rewardForUpdate == null)
                 throw new AppException("Reward not found");
-            rewardForUpdate = reward;
+            rewardForUpdate.Name = reward.Name;
+            rewardForUpdate.Description = reward.Description;
+            rewardForUpdate.Amount = reward.Amount;
 
 
             _context.Rewards.Update(rewardForUpdate);

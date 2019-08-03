@@ -5,12 +5,13 @@ import { registration } from './registration.reducer';
 import { users } from './users.reducer';
 import { alert } from './alert.reducer';
 import { companies } from './companies.reducer'
-import { posts } from '../_components/PostsContainer/reducer'
+import { posts } from '../_components/CampaignPage/PostsContainer/reducer'
 import { createCampaignPageReducer } from '../_components/CampaignEditorPage'
 import { campaignPageReducer } from '../_components/CampaignPage'
 import {rewardsReducer} from "../_components/CampaignPage/RewardsSection";
 import {createRewardReducer} from '../_components/CampaignPage/RewardEditorModal'
-
+import {userPageReducer} from '../_components/ProfilePage/reducer'
+import {commentsContainerReducer} from '../_components/CampaignPage/CommentsContainer/reducer'
 
 const rootReducer = combineReducers({
   authentication,
@@ -18,10 +19,12 @@ const rootReducer = combineReducers({
   users,
   alert,
   createCampaignPageReducer,
-    campaignPageReducer,
+  campaignPageReducer,
   posts,
-    createRewardReducer,
-    rewardsReducer
+  createRewardReducer,
+  rewardsReducer,
+  userPageReducer,
+    commentsContainerReducer
 });
 
 export default rootReducer;

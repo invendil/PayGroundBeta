@@ -39,6 +39,10 @@ namespace DataLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CompanyId");
+
+                    b.HasIndex("UserId");
+
                     b.ToTable("Comments");
                 });
 
@@ -115,17 +119,13 @@ namespace DataLayer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CommentId");
+                    b.Property<int>("CommentId");
 
                     b.Property<int>("State");
 
-                    b.Property<int?>("UserId");
+                    b.Property<int>("UserId");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CommentId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Likes");
                 });
@@ -212,6 +212,19 @@ namespace DataLayer.Migrations
                     b.ToTable("UserRoles");
                 });
 
+            modelBuilder.Entity("DataLayer.Entityes.Comment", b =>
+                {
+                    b.HasOne("DataLayer.Entityes.Company", "Company")
+                        .WithMany()
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("DataLayer.Entityes.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("DataLayer.Entityes.Company", b =>
                 {
                     b.HasOne("DataLayer.Entityes.CompanyCategory", "Category")
@@ -229,17 +242,6 @@ namespace DataLayer.Migrations
                     b.HasOne("DataLayer.Entityes.Company", "Company")
                         .WithMany("Images")
                         .HasForeignKey("CompanyId");
-                });
-
-            modelBuilder.Entity("DataLayer.Entityes.Like", b =>
-                {
-                    b.HasOne("DataLayer.Entityes.Comment", "Comment")
-                        .WithMany()
-                        .HasForeignKey("CommentId");
-
-                    b.HasOne("DataLayer.Entityes.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("DataLayer.Entityes.Post", b =>

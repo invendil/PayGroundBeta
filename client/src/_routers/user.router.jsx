@@ -8,11 +8,12 @@ import PrivateRoute from "./PrivateRoute";
 /*import { CreateCompanyPage } from  '../_components/CreateCompanyPage/CreateCampaignPage*/
 import  CreateCampaignPage from  '../_components/CampaignEditorPage'
 import  CampaignPage from  '../_components/CampaignPage'
-import { PostsContainer } from '../_components/PostsContainer/component'
+import { PostsContainer } from '../_components/CampaignPage/PostsContainer/component'
 
 
-import {PostCreateComponent} from '../_components/PostsContainer/PostCreateComponent/component'
+import {PostCreateComponent} from '../_components/CampaignPage/PostsContainer/PostCreateComponent/component'
 import SignupPage from "../_components/SignupPage/component";
+import ProfilePage from "../_components/ProfilePage";
 const UserRouter = () => {
     return (
         <Switch>
@@ -27,6 +28,7 @@ const UserRouter = () => {
             <Route exact path="/companies/edit/:id" component={CreateCampaignPage} />
 
             <Route path="/login" component={LoginPage} />
+            <Route path="/profile" component={ProfilePage} />
             <Route path="/register" component={SignupPage} />
             <Route component={BodyPage} />
 
