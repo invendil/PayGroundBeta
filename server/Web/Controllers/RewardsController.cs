@@ -9,12 +9,22 @@ using BuissnesLayer.ModelView;
 using DataLayer.Entityes;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
 
 
+using AutoMapper;
+using System.IdentityModel.Tokens.Jwt;
+
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
+using BuissnesLayer.Responses;
+using BuissnesLayer.Requests;
 
 namespace WebApi.Controllers
 {
+    [Authorize]
     [Route("[controller]")]
     public class RewardsController : Controller
     {
@@ -22,24 +32,25 @@ namespace WebApi.Controllers
         private ICompanyService _companyService;
         private IRewardService _rewardService;
         private IUserService _userService;
-        
 
+        private readonly AppSettings _appSettings;
         public RewardsController(
             
             ICompanyService companyService,
             IUserService userService,
-            IRewardService rewardService
+            IRewardService rewardService,
+            IOptions<AppSettings> appSettings
             )
         {
             _companyService = companyService;
             _rewardService = rewardService;
             _userService = userService;
-           
+            _appSettings = appSettings.Value;
         }
 
 
 
-        
+        [AllowAnonymous]
         [HttpPost("addreward")]
         public IActionResult AddReward([FromBody]RewardModel rewardModel)
         {

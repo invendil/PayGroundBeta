@@ -14,10 +14,12 @@ function update(data) {
     let user = JSON.parse(localStorage.getItem('user'));
 
     data ={
-        ...data,
-        id : data.rewardId,
-        companyId : data.id,
-        username: user.username
+        "name": data.name,
+        "description": data.description,
+        "id": data.rewardId,
+        "amount": data.amount,
+        "companyid": data.id,
+        "username": user.username
     }
     console.log("reward", data);
     const requestOptions = {
@@ -44,15 +46,18 @@ function add(data) {
     let user = JSON.parse(localStorage.getItem('user'));
 
     data ={
-        ...data,
-        id : data.rewardId,
-        companyId : data.id,
-        username: user.username
+        "name": data.name,
+        "description": data.description,
+
+        "amount": data.amount,
+        "companyid": data.id,
+        "username": user.username
     }
+    const reward = data;
     console.log("reward", data);
     const requestOptions = {
         method: 'POST',
-        headers: { ...authHeader(), 'Content-Type': 'application/json' },
+        headers: {'Content-Type': 'application/json' },
         body: JSON.stringify(data)
     };
 

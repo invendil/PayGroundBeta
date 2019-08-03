@@ -142,7 +142,7 @@ namespace DataLayer.Migrations
 
                     b.Property<DateTime>("CreateTime");
 
-                    b.Property<string>("Title");
+                    b.Property<string>("Name");
 
                     b.HasKey("Id");
 
@@ -157,13 +157,13 @@ namespace DataLayer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Amount");
+                    b.Property<decimal>("Amount");
 
                     b.Property<int>("CompanyId");
 
                     b.Property<string>("Description");
 
-                    b.Property<string>("Title");
+                    b.Property<string>("Name");
 
                     b.HasKey("Id");
 

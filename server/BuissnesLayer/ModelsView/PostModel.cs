@@ -11,7 +11,7 @@ namespace BuissnesLayer.ModelView
 
        
         
-        public string Title { get; set; }
+        public string Name { get; set; }
        
         public string BodyHtml { get; set; }
         public DateTime CreateTime { get; set; }

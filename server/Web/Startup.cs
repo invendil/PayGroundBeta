@@ -17,6 +17,7 @@ using Microsoft.Extensions.Options;
 using BuissnesLayer.Helpers;
 using DataLayer;
 using BuissnesLayer.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi
 {
@@ -39,9 +40,13 @@ namespace WebApi
             services.AddAutoMapper();
 
             // configure strongly typed settings objects
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.SuppressModelStateInvalidFilter = true;
+            });
             var appSettingsSection = Configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingsSection);
-
+            
             // configure jwt authentication
             var appSettings = appSettingsSection.Get<AppSettings>();
             var key = Encoding.ASCII.GetBytes(appSettings.Secret);

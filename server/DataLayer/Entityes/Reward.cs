@@ -12,7 +12,7 @@ namespace DataLayer.Entityes
         public Company Company { get; set; }
         [NotMapped]
         public List<User> Users { get; set; }
-        public string Title { get; set; }
+        public string Name { get; set; }
         public decimal Amount { get; set; }
         public string Description { get; set; }
 

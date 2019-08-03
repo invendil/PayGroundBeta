@@ -13,7 +13,8 @@ namespace BuissnesLayer.Helpers.Mappers
         {
             Reward reward = new Reward()
             {
-                Title = rewardModel.Title,
+                Id = rewardModel.Id,
+                Name = rewardModel.Name,
                 CompanyId = rewardModel.CompanyId,
 
                 Description = rewardModel.Description,
@@ -29,7 +30,9 @@ namespace BuissnesLayer.Helpers.Mappers
         {
             RewardModel rewardModel = new RewardModel()
             {
-                Title = reward.Title,
+
+                Id = reward.Id,
+                Name = reward.Name,
                 CompanyId = reward.CompanyId,
 
                 Description = reward.Description,

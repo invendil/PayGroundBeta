@@ -38,10 +38,14 @@ namespace WebApi.Services
         public Reward Update(Reward reward)
         {
 
-            
-            
-           
-            _context.Rewards.Update(reward);
+            var rewardForUpdate = _context.Rewards.Find(reward.Id);
+
+            if (rewardForUpdate == null)
+                throw new AppException("Reward not found");
+            rewardForUpdate = reward;
+
+
+            _context.Rewards.Update(rewardForUpdate);
             _context.SaveChanges();
 
             return reward;

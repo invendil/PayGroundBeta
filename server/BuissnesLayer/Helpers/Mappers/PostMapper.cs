@@ -13,7 +13,7 @@ namespace BuissnesLayer.Helpers.Mappers
         {
             Post post = new Post()
             {
-                Title = postModel.Title,
+                Name = postModel.Name,
                 CompanyId = postModel.CompanyId,
          
                 BodyHtml = postModel.BodyHtml,
@@ -29,7 +29,7 @@ namespace BuissnesLayer.Helpers.Mappers
         {
             PostModel postModel = new PostModel()
             {
-                Title = post.Title,
+                Name = post.Name,
                 CompanyId = post.CompanyId,
 
                 BodyHtml = post.BodyHtml,

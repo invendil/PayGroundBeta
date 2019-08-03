@@ -28,6 +28,7 @@ namespace WebApi.Controllers
     [Route("[controller]")]
     public class CompaniesController : Controller
     {
+        private IRewardService _rewardService;
         private ICompanyCategoryService _companyCategoryService;
         private ICompanyService _companyService;
         private IUserService _userService;
@@ -39,15 +40,19 @@ namespace WebApi.Controllers
             ICompanyService companyService,
             IUserService userService,
             IMapper mapper,
+             IRewardService rewardService,
             IOptions<AppSettings> appSettings)
         {
             _companyService = companyService;
             _companyCategoryService = companyCategoryService;
             _userService = userService;
             _mapper = mapper;
+            _rewardService = rewardService;
             _appSettings = appSettings.Value;
         }
 
+
+        
 
 
         [Authorize(Roles = "USER")]
