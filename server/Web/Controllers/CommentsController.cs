@@ -21,6 +21,9 @@ using BuissnesLayer.Interfaces;
 using DataLayer.Entityes;
 using BuissnesLayer.Helpers.Mappers;
 using BuissnesLayer.Responses;
+using Microsoft.AspNetCore.SignalR;
+using WebApi.Hubs;
+
 namespace WebApi.Controllers
 {
 
@@ -28,7 +31,7 @@ namespace WebApi.Controllers
     public class CommentsController : Controller
     {
         private ICommentService _commentService;
-        
+        private readonly IHubContext<CommentsHub> _hubContext;
         private ICompanyService _companyService;
         private IUserService _userService;
         
@@ -38,14 +41,14 @@ namespace WebApi.Controllers
             
             ICompanyService companyService,
             IUserService userService,
-            
+            IHubContext<CommentsHub> hubContext,
              ICommentService commentService,
             IOptions<AppSettings> appSettings)
         {
             _companyService = companyService;
             
             _userService = userService;
-            
+            _hubContext = hubContext;
             _commentService = commentService;
             _appSettings = appSettings.Value;
         }
@@ -60,8 +63,10 @@ namespace WebApi.Controllers
 
             if (comment == null)
                 return BadRequest("Add comment error");
-            // map dto to entity
 
+            _hubContext.Clients.All.SendAsync("commentAdded/" + comment.CompanyId, "refresh");
+            // map dto to entity
+            
             return Ok(new { id = comment.Id });
         }
 

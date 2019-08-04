@@ -17,8 +17,8 @@ class NavigationBar extends React.Component{
     render(){
         const { isAuthorized} = this.props;
         return (
-            <Navbar bg="light" expand="sm" className="px-3">
-                <Navbar.Brand>Crowdfunding</Navbar.Brand>
+            <Navbar bg="dark" variant="dark" expand="sm" className="px-3">
+                <Navbar.Brand>PayGround</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">

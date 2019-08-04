@@ -12,8 +12,9 @@ import DeleteModal from './DeleteModal/component';
 import {Redirect} from "react-router-dom";
 import RewardEditorModal from "./RewardEditorModal";
 import RewardSection from "./RewardsSection";
-import CommentContainer from "./CommentsContainer"
+import CommentContainer from "../TRASH/CommentsContainer"
 import ReactHtmlParser from "react-html-parser";
+import CommentsTab from "./CommentsTab/component";
 
 const { confirm } = Modal;
 const { TabPane } = Tabs;
@@ -49,7 +50,7 @@ class CampaignPage extends Component {
 
     render() {
 
-        const { campaign, user, deleteCampaign, isLoading, error, isDeleted, match } = this.props;
+        const { campaign, user, deleteCampaign, isLoading, error, isDeleted, match , isAuthorized} = this.props;
         const isUserCreator = campaign.user && user && user.id === campaign.user.id;
 
         console.log(campaign);
@@ -177,10 +178,10 @@ class CampaignPage extends Component {
                            123
                         </TabPane>
                         <TabPane tab="Comments" key="3">
-                            <CommentContainer
-                                id={Number(match.params.id) }
-                                isUserCreator = {isUserCreator}
-
+                            <CommentsTab
+                                id={match.params.id}
+                                user={user}
+                                isAuthorized = {isAuthorized}
                             />
                         </TabPane>
                     </Tabs>

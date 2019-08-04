@@ -11,7 +11,7 @@ import { campaignPageReducer } from '../_components/CampaignPage'
 import {rewardsReducer} from "../_components/CampaignPage/RewardsSection";
 import {createRewardReducer} from '../_components/CampaignPage/RewardEditorModal'
 import {userPageReducer} from '../_components/ProfilePage/reducer'
-import {commentsContainerReducer} from '../_components/CampaignPage/CommentsContainer/reducer'
+import {commentsContainerReducer} from '../_components/TRASH/CommentsContainer/reducer'
 
 const rootReducer = combineReducers({
   authentication,

@@ -1,3 +1,8 @@
+#description{
+    word-wrap: break-word;
+}
+
+
 .carousel{
     height: 400px !important;
 }

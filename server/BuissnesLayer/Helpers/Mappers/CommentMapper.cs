@@ -17,7 +17,7 @@ namespace BuissnesLayer.Helpers.Mappers
                 Body = commentModel.Body,
                 CompanyId = commentModel.CompanyId,
                 UserId = commentModel.UserId,
-                CreateTime = commentModel.CreateTime,
+                CreateTime = commentModel.CreateTime != DateTime.MinValue ? commentModel.CreateTime : DateTime.Now,
                 DislikesCount = commentModel.DislikesCount,
                 LikesCount = commentModel.LikesCount
                 

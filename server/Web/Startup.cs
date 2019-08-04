@@ -18,6 +18,7 @@ using BuissnesLayer.Helpers;
 using DataLayer;
 using BuissnesLayer.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using WebApi.Hubs;
 
 namespace WebApi
 {
@@ -38,6 +39,9 @@ namespace WebApi
             services.AddDbContext<EFDBContext>(options => options.UseSqlServer(connection, b => b.MigrationsAssembly("DataLayer")));
             services.AddMvc();
             services.AddAutoMapper();
+
+
+            services.AddSignalR();
 
             // configure strongly typed settings objects
             services.Configure<ApiBehaviorOptions>(options =>
@@ -90,6 +94,13 @@ namespace WebApi
                 .AllowAnyMethod()
                 .AllowAnyHeader()
                 .AllowCredentials());
+
+
+            app.UseStaticFiles();
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<CommentsHub>("/commentsHub");
+            });
 
             app.UseAuthentication();
 

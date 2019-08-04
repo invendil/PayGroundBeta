@@ -17,7 +17,7 @@ import {
     GET_REWARD_SUCCESS
 } from './constants';
 import {commentService, companyService} from '../../_services';
-import {commentConstants} from "./CommentsContainer/constants";
+import {commentConstants} from "../TRASH/CommentsContainer/constants";
 import {alertActions} from "../../_actions/alert.actions";
 
 export const getCampaignSuccess = payload => ({
