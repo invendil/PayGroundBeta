@@ -36,12 +36,27 @@ export const commentsContainerReducer = (state = initialState, action) => {
                 ...state,
                 comments : state.comments.map(item => {
                     if(Number(item.id) === Number(action.commentId))
-                        return {
-                            ...item,
-                            state : action.state,
-                            likesCount : item.likesCount+action.state,
-                            dislikesCount : item.dislikesCount-action.state
-                        };
+                        if (item.state !== 0){
+                            return {
+                                ...item,
+                                state : action.state,
+                                likesCount : item.likesCount+action.state,
+                                dislikesCount : item.dislikesCount-action.state
+                            };
+                        } else {
+                            if (action.state === 1)
+                                return {
+                                    ...item,
+                                    state : action.state,
+                                    likesCount : item.likesCount+action.state,
+                                };
+                            else
+                                return {
+                                    ...item,
+                                    state : action.state,
+                                    dislikesCount : item.dislikesCount-action.state
+                                };
+                        }
                     return item;
                 }),
                 changedCommentId: action.payload ,

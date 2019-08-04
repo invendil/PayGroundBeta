@@ -5,10 +5,39 @@ export const companyService = {
     update,
     getById,
     getCategories,
+    getReward,
+    donateMoney,
+    changeRatingState,
     delete : _delete
 
 
 };
+function donateMoney(data) {
+
+    console.log("getReward data", data);
+    const requestOptions = {
+        method: 'POST',
+        headers: { ...authHeader(), 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    };
+
+    return fetch(config.apiUrl + '/companies/donatemoney', requestOptions).then(handleResponse, handleError);
+}
+
+
+function getReward(data) {
+
+    console.log("getReward data ", data);
+    const requestOptions = {
+        method: 'POST',
+        headers: { ...authHeader(), 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    };
+
+    return fetch(config.apiUrl + '/companies/getreward', requestOptions).then(handleResponse, handleError);
+}
+
+
 
 function update(company) {
     let user = JSON.parse(localStorage.getItem('user'));
@@ -27,6 +56,17 @@ function update(company) {
     return fetch(config.apiUrl + '/companies/' + company.id, requestOptions).then(handleResponse, handleError);
 }
 
+function changeRatingState(state) {
+
+    console.log("state changeRatingState", state);
+    const requestOptions = {
+        method: 'PUT',
+        headers: { ...authHeader(), 'Content-Type': 'application/json' },
+        body: JSON.stringify(state)
+    };
+
+    return fetch(config.apiUrl + '/companies/changerating' , requestOptions).then(handleResponse, handleError);
+}
 
 function getCategories() {
     const requestOptions = {

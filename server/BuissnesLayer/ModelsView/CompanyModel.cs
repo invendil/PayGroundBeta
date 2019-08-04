@@ -20,6 +20,8 @@ namespace BuissnesLayer.ModelView
         public decimal GoalMoney { get; set; }
         public decimal CurrentMoney { get; set; }
         public IEnumerable<string> Images { get; set; }
+        public double Rating { get; set; }
+        public int RatingsCount { get; set; }
 
 
     }

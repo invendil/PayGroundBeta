@@ -11,6 +11,7 @@ namespace DataLayer.Entityes
         public User User { get; set; }
         public string Name { get; set; }
         public  List<Image> Images { get; set; }
+        public List<Reward> Rewards { get; set; }
         public int CategoryId { get; set; }
         public CompanyCategory Category { get; set; }
         public string UrlVideo { get; set; }
@@ -19,8 +20,8 @@ namespace DataLayer.Entityes
         public DateTime CreateTime { get; set; }
         public DateTime FinishTime { get; set; }
         public string DesriptionMD { get; set; }
-        public double Rate { get; set; }
-        public int RateCount { get; set; }
+        public double Rating { get; set; }
+        public int RatingsCount { get; set; }
 
     }
 }

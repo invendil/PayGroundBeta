@@ -1,12 +1,24 @@
 import {
-    GET_CAMPAIGN_SUCCESS,
-    GET_CAMPAIGN_FAIL,
-    GET_CAMPAIGN,
-    DELETE_CAMPAIGN,
     CLEAR_ERRORS,
-    DELETE_CAMPAIGN_SUCCESS, DELETE_CAMPAIGN_FAIL, RESET_DELETING
+    DELETE_CAMPAIGN,
+    DELETE_CAMPAIGN_FAIL, DELETE_CAMPAIGN_SUCCESS,
+    GET_CAMPAIGN,
+    GET_CAMPAIGN_FAIL,
+    GET_CAMPAIGN_SUCCESS,
+    RESET_DELETING,
+    CHANGE_RATING_FAIL,
+    CHANGE_RATING_SUCCESS,
+    CHANGE_RATING,
+    DONATE,
+    DONATE_FAIL,
+    DONATE_SUCCESS,
+    GET_REWARD,
+    GET_REWARD_FAIL,
+    GET_REWARD_SUCCESS
 } from './constants';
-import { companyService } from '../../_services';
+import {commentService, companyService} from '../../_services';
+import {commentConstants} from "./CommentsContainer/constants";
+import {alertActions} from "../../_actions/alert.actions";
 
 export const getCampaignSuccess = payload => ({
     type: GET_CAMPAIGN_SUCCESS,
@@ -62,5 +74,55 @@ export const deleteCampaignRequest = id => dispatch => {
                 dispatch(deleteCampaignFail(err));
                 dispatch(clearErrors());
             });
+
+};
+
+export const changeRatingState = state => dispatch => {
+
+        dispatch(request());
+
+        companyService.changeRatingState(state)
+            .then(
+                (rating) => {
+                    dispatch(success( rating));
+
+
+                },
+                error => {
+                    dispatch(failure(error));
+
+                }
+            );
+
+
+    function request() { return { type: CHANGE_RATING} }
+    function success(payload) { return {type: CHANGE_RATING_SUCCESS, payload  } }
+    function failure(error) { return { type: CHANGE_RATING_FAIL, error } }
+}
+
+export const donateMoney = data => dispatch => {
+    dispatch({ type: DONATE });
+
+    companyService.donateMoney(data)
+        .then(
+            currentMoney => dispatch({type : DONATE_SUCCESS, payload : currentMoney}),
+
+            error =>  dispatch({type : DONATE_FAIL, error})
+
+
+        )
+
+};
+
+export const getReward = data => dispatch => {
+    dispatch({ type: GET_REWARD });
+
+    companyService.getReward(data)
+        .then(
+            currentMoney => dispatch({type : GET_REWARD_SUCCESS, currentMoney}),
+            error =>  dispatch({type : GET_REWARD_FAIL, error})
+
+
+        )
 
 };

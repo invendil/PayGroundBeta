@@ -66,9 +66,9 @@ namespace DataLayer.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<double>("Rate");
+                    b.Property<double>("Rating");
 
-                    b.Property<int>("RateCount");
+                    b.Property<int>("RatingsCount");
 
                     b.Property<string>("UrlVideo");
 
@@ -151,6 +151,27 @@ namespace DataLayer.Migrations
                     b.ToTable("Posts");
                 });
 
+            modelBuilder.Entity("DataLayer.Entityes.Rating", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CompanyId");
+
+                    b.Property<int>("State");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CompanyId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Ratings");
+                });
+
             modelBuilder.Entity("DataLayer.Entityes.Reward", b =>
                 {
                     b.Property<int>("Id")
@@ -170,6 +191,25 @@ namespace DataLayer.Migrations
                     b.HasIndex("CompanyId");
 
                     b.ToTable("Rewards");
+                });
+
+            modelBuilder.Entity("DataLayer.Entityes.Transaction", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CompanyId");
+
+                    b.Property<decimal>("Money");
+
+                    b.Property<int>("RewardId");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Transactions");
                 });
 
             modelBuilder.Entity("DataLayer.Entityes.User", b =>
@@ -252,10 +292,23 @@ namespace DataLayer.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("DataLayer.Entityes.Reward", b =>
+            modelBuilder.Entity("DataLayer.Entityes.Rating", b =>
                 {
                     b.HasOne("DataLayer.Entityes.Company", "Company")
                         .WithMany()
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("DataLayer.Entityes.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("DataLayer.Entityes.Reward", b =>
+                {
+                    b.HasOne("DataLayer.Entityes.Company", "Company")
+                        .WithMany("Rewards")
                         .HasForeignKey("CompanyId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

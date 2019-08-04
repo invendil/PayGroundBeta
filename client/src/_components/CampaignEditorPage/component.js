@@ -88,23 +88,34 @@ class CampaignEditorPage extends React.Component {
                     onSubmit={(values, actions) => {
                         console.log("category", values.category);
                         const html = markDownHtmlConverter.markDownToHtml(values.description);
-                        const company = {
 
-                            urlvideo : values.link ? values.link : "default link",
-                            goalmoney : values.goalAmount,
-                            name : values.title ? values.title : "default name",
-                            categoryid : categories.indexOf(values.category) +1 ,
-                            finishtime : values.expirationDate,
-                            description : html,
-                            images : values.images
-                        }
 
-                        console.log(company);
+
                         if (isCreating) {
-                            console.log('cr');
+                            let company = {
+
+                                urlvideo : values.link ? values.link : "default link",
+                                goalmoney : values.goalAmount,
+                                name : values.title ? values.title : "default name",
+                                categoryid : categories.indexOf(values.category) +1 ,
+                                finishtime : values.expirationDate,
+                                description : html,
+                                images : values.images
+                            }
+
                             createCampaign(company);
                         } else {
-                            updateCampaign( campaign
+                            let company = {
+                                id : campaign.id,
+                                urlvideo : values.link ? values.link : "default link",
+                                goalmoney : values.goalAmount,
+                                name : values.title ? values.title : "default name",
+                                categoryid : categories.indexOf(values.category) +1 ,
+                                finishtime : values.expirationDate,
+                                description : html,
+                                images : values.images
+                            }
+                            updateCampaign( company
                             );
                         }
                         actions.setSubmitting(false);

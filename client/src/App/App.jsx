@@ -10,7 +10,7 @@ import { LoginPage } from '../LoginPage';
 import { RegisterPage } from '../RegisterPage';
 import {BodyPage} from "../BodyPage";
 import NavigationBar from "../_components/layout/Navigationbar/NavigationBar";
-import UserRouter from "../_routers/user.router";
+import Router from "../_routers";
 
 class App extends React.Component {
     constructor(props) {
@@ -25,7 +25,7 @@ class App extends React.Component {
             <BrowserRouter >
                 <div>
                         <NavigationBar/>
-                        <UserRouter />
+                        <Router />
                 </div>
             </BrowserRouter>
         );

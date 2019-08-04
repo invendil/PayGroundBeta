@@ -30,17 +30,19 @@ class SignupFormContainer extends React.Component {
                         serverErrors: {},
                     });
                 actions.setSubmitting(false);
-            })
-            .catch(err => {
-                this.setState({
-                    serverErrors: {
-                        message: err.message,
-                        validation: err.response.data.errors,
-                    },
-                    serverSuccessMessage: '',
+
+            },
+                error => {
+                    this.setState({
+                        serverErrors: {
+                            message: error.message,
+                            validation: error.response.data.errors,
+                        },
+                        serverSuccessMessage: '',
+                    });
+                    actions.setSubmitting(false);
                 });
-                actions.setSubmitting(false);
-            });
+
     };
 
     render() {
@@ -61,7 +63,7 @@ class SignupFormContainer extends React.Component {
                 {serverSuccessMessage && (
                     <Alert
                         className="mb-3"
-                        message="Submitting error"
+
                         onClose={this.onCloseSuccessAlert}
                         type="success"
                         description={serverSuccessMessage}

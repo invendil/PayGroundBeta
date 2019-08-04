@@ -4,6 +4,7 @@ import {
     CREATE_CAMPAIGN_SUCCESS,
     CREATE_CAMPAIGN_FAIL,
     RESET_CAMPAIGN_RESPONSE, UPDATE_CAMPAIGN, UPDATE_CAMPAIGN_FAIL, UPDATE_CAMPAIGN_SUCCESS, SET_EDITING, SET_CREATING,
+
 } from './constants';
 import {CLEAR_ERRORS} from "../CampaignPage/constants";
 
@@ -31,11 +32,16 @@ export const createCampaignPageReducer = (state = initialState, action) => {
         case UPDATE_CAMPAIGN_FAIL:
             return {
                 ...state,
-                error: action.payload.response.data.errors,
+                error: action.error,
                 isLoading: false,
             };
         case UPDATE_CAMPAIGN_SUCCESS:
             return { ...state, campaign: { id: action.payload.id }, isLoading: false };
+
+
+
+
+
         case SET_CATEGORIES:
             return { ...state, categories: action.payload };
         case SET_EDITING:

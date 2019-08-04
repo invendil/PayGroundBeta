@@ -43,7 +43,9 @@ namespace BuissnesLayer.Helpers.Mappers
                 FinishTime = company.FinishTime,
                 Description = company.DesriptionMD,
                 UserId = company.User.Id,
-                CurrentMoney = company.CurrentMoney
+                CurrentMoney = company.CurrentMoney,
+                Rating = company.Rating,
+                RatingsCount = company.RatingsCount
             };
 
 

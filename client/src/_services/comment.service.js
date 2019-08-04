@@ -5,6 +5,7 @@ export const commentService = {
     update,
     getAllByCompanyId,
     changeCommentState,
+
     delete : _delete
 
 
@@ -26,6 +27,9 @@ function update(comment) {
 
     return fetch(config.apiUrl + '/comments/' + comment.id, requestOptions).then(handleResponse, handleError);
 }
+
+
+
 
 
 function changeCommentState(state) {

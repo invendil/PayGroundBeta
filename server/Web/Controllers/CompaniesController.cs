@@ -135,6 +135,41 @@ namespace WebApi.Controllers
             }
         }
 
+
+        [HttpPut("changerating")]
+        public IActionResult ChangeRatingState([FromBody]RatingModel ratingModel)
+        {
+            double rating = _companyService.ChangeRateState(ratingModel);
+
+            return Ok( rating );
+        }
+
+
+
+        [HttpPost("donatemoney")]
+        public IActionResult DonateMoney([FromBody]TransactionModel transactionModel)
+        {
+            decimal currentMoney;
+            if (transactionModel.Money != 0 && transactionModel.RewardId == 0)
+                currentMoney = _companyService.DonateMoney(transactionModel);
+            else
+            
+                throw new AppException("Bad transaction");
+            return Ok(currentMoney);
+        }
+
+        [HttpPost("getreward")]
+        public IActionResult GetReward([FromBody]TransactionModel transactionModel)
+        {
+            decimal currentMoney;
+            
+            if (transactionModel.Money == 0 && transactionModel.RewardId != 0)
+                currentMoney = _companyService.GetReward(transactionModel);
+            else
+                throw new AppException("Bad transaction");
+            return Ok(currentMoney);
+        }
+
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {

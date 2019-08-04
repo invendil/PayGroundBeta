@@ -7,6 +7,7 @@ import {
     UPDATE_CAMPAIGN,
     UPDATE_CAMPAIGN_SUCCESS,
     UPDATE_CAMPAIGN_FAIL, SET_EDITING, SET_CREATING,
+
 } from './constants';
 import { companyService } from '../../_services';
 import {clearErrors} from "../CampaignPage/actions";
@@ -60,12 +61,16 @@ export const createCampaignRequest = data => dispatch => {
     companyService.add(data)
         .then(
             id => {dispatch(createCampaignSuccess(id)),
-            error =>  dispatch(createCampaignFail(error));
+                error =>  dispatch(createCampaignFail(error));
 
 
-        })
+            })
 
 };
+
+
+
+
 
 export const updateCampaignRequest = data => dispatch => {
     dispatch({ type: UPDATE_CAMPAIGN });

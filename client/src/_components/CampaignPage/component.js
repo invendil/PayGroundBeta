@@ -19,16 +19,32 @@ const { TabPane } = Tabs;
 
 class CampaignPage extends Component {
 
+
     componentDidMount() {
         const { id } = this.props.match.params;
 
         this.props.getCampaign(id);
     }
 
+    getRewardHandler = () => {
+        thi
+    }
+
+    ratingChangeHandler = (ratingState) =>{
+        const {user, match} = this.props;
+        const rating ={
+            companyId : Number(match.params.id),
+            userId : user.id,
+            state : ratingState
+        };
+        this.props.changeRatingState(rating)
+    }
+
     render() {
 
         const { campaign, user, deleteCampaign, isLoading, error, isDeleted, match } = this.props;
         const isUserCreator = campaign.user && user && user.id === campaign.user.id;
+
         console.log(campaign);
 
         return (
@@ -74,21 +90,26 @@ class CampaignPage extends Component {
                         </Col>
                         <Col md={4}>
                             <div className="d-flex justify-content-between">
-                                <Rate disabled={this.props.isAuthorized} />
-                                <span>avg rate</span>
+                                <Rate
+                                    disabled={user.isAuthorized}
+                                    onChange={this.ratingChangeHandler}
+
+                                    defaultValue={campaign}
+                                />
+                                <span>{campaign.rating !== 0 ? parseFloat(campaign.rating).toFixed(1) : null}</span>
                             </div>
                             <Progress
                                 className="py-2"
                                 percent={
-                                    (campaign.currentmoney / campaign.goalmoney) * 100
+                                    (campaign.currentMoney / campaign.goalMoney) * 100
                                 }
                                 showInfo={false}
                             />
-                            <span>${campaign.goalmoney}</span>
-                            <p>pledged out of ${campaign.goalmoney} goal </p>
+                            <span>${campaign.goalMoney}</span>
+                            <p>pledged out of ${campaign.goalMoney} goal </p>
                             <span>30</span>
                             <p>backers</p>
-                            <span>{getLeftDays(campaign.finishtime)}</span>
+                            <span>{getLeftDays(campaign.finishTime)}</span>
                             <p>days left</p>
                             <p className="">
                                 Creator:{' '}
@@ -96,9 +117,7 @@ class CampaignPage extends Component {
                                     ? `${campaign.user.firstName} ${campaign.user.lastName}`
                                     : null}
                             </p>
-                            <div className="d-flex justify-content-center">
-                                <Button className="w-100">Back this campaign</Button>
-                            </div>
+
                             {isUserCreator && (
                                 <div className="d-flex justify-content-between mt-5">
                                     <Link
@@ -160,6 +179,9 @@ class CampaignPage extends Component {
 CampaignPage.propTypes = {
     isDeleted: PropTypes.bool.isRequired,
     deleteCampaign: PropTypes.func.isRequired,
+    getReward: PropTypes.func.isRequired,
+    donateMoney: PropTypes.func.isRequired,
+    changeRatingState: PropTypes.func.isRequired,
     getCampaign: PropTypes.func.isRequired,
     error: PropTypes.string.isRequired,
     campaign: PropTypes.object.isRequired,

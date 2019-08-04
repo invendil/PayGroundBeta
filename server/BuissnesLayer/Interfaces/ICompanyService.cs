@@ -14,6 +14,8 @@ namespace BuissnesLayer.Interfaces
         IEnumerable<Image> GetImagesByCompanyId(int id);
         void Update(Company company, CompanyModel companyModel);
         void Delete(int id);
-
+        decimal DonateMoney(TransactionModel transactionModel);
+        decimal GetReward(TransactionModel transactionModel);
+        double ChangeRateState(RatingModel ratingModel);
     }
 }
