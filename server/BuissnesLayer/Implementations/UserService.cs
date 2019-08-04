@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using BuissnesLayer.ModelView;
 
 namespace WebApi.Services
 {
@@ -46,11 +47,40 @@ namespace WebApi.Services
             return _context.Users.Include(x => x.Role);
         }
 
-        public User GetById(int id)
+        public UserModel GetById(int id)
         {
-            return _context.Users
-                .Include(x => x.Role)
+
+            var user = _context.Users
+                .Include(x => x.Rewards)
                 .FirstOrDefault(x => x.Id == id);
+           
+            if (user == null)
+                throw new AppException("Unknown user");
+            var userRewards = user.Rewards;
+            UserModel userModel = new UserModel()
+            {
+                Id = user.Id,
+                Username = user.Username,
+                LastName = user.LastName,
+                FirstName = user.FirstName,
+            };
+
+            IEnumerable<RewardModel> rewards = _context.Companies.Join(userRewards, 
+                p => p.Id, 
+                c => c.CompanyId, 
+                (p, c) => new RewardModel()
+                {
+                    CompanyName = p.Name,
+                    Id = c.Id,
+                    Name = c.Name,
+                    CompanyId = c.CompanyId,
+
+                    Description = c.Description,
+                    Amount = c.Amount
+                }
+            );
+            userModel.Rewards = rewards;
+            return userModel;
         }
         public User GetByUsername(string username)
         {

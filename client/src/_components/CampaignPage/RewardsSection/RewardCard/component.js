@@ -6,6 +6,11 @@ import DeleteRewardModal from './DeleteRewardModal/component';
 import { Link } from 'react-router-dom';
 
 class RewardCard extends Component {
+
+
+    supportByRewardHandler = () =>{
+        this.props.getRewardHandler(this.props.reward);
+    }
     render() {
         const {
             reward,
@@ -13,7 +18,8 @@ class RewardCard extends Component {
             isUserCreator,
             deleteReward,
             isLoading,
-            isAuthorized,
+            isAuthorized
+
         } = this.props;
         console.log('REWARD', reward);
         return (
@@ -22,19 +28,17 @@ class RewardCard extends Component {
                     <Card.Title>{reward.name}</Card.Title>
                     <Card.Text>{reward.description}</Card.Text>
                     <Card.Text>${reward.amount}</Card.Text>
-                    {isAuthorized ? (
+                    {isAuthorized && !isUserCreator ? (
                         <Button
                             variant="primary"
                             className="w-100"
-                            onClick={console.log(1)}
+                            onClick={this.supportByRewardHandler}
                         >
                             Support
                         </Button>
-                    ) : (
-                        <Link to="/login" className="btn btn-primary w-100">
-                            Support
-                        </Link>
-                    )}
+                    ) :
+                        null
+                    }
                     {isUserCreator && (
                         <div>
                             <RewardEditorModal reward={reward} id={id} />

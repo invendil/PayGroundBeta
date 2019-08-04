@@ -7,7 +7,7 @@ namespace DataLayer.Entityes
     public class Company
     {
         public int Id { get; set; }
-       
+        public int UserId { get; set; }
         public User User { get; set; }
         public string Name { get; set; }
         public  List<Image> Images { get; set; }

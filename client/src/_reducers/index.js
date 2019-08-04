@@ -24,7 +24,8 @@ const rootReducer = combineReducers({
   createRewardReducer,
   rewardsReducer,
   userPageReducer,
-    commentsContainerReducer
+    commentsContainerReducer,
+
 });
 
 export default rootReducer;

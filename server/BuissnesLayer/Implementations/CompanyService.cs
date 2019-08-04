@@ -74,12 +74,14 @@ namespace WebApi.Services
             };
 
             user.Rewards.Add(reward);
+            reward.Users.Add(user);
             _context.Transactions.Add(transaction);
             company.CurrentMoney += reward.Amount;
+            _context.Rewards.Update(reward);
             _context.Users.Update(user);
             _context.Companies.Update(company);
             _context.SaveChanges();
-            return company.CurrentMoney
+            return company.CurrentMoney;
         }
 
         public double ChangeRateState(RatingModel ratingModel)

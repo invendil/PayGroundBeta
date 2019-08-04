@@ -32,7 +32,9 @@ namespace WebApi.Services
 
         public IEnumerable<Reward> GetAllByCompanyId(int companyId)
         {
-            return _context.Rewards.Where(x => x.CompanyId == companyId);
+
+            var rewards = _context.Rewards.Where(x => x.CompanyId == companyId);
+            return rewards;
         }
 
         public Reward Update(Reward reward)
@@ -71,9 +73,9 @@ namespace WebApi.Services
 
          public Reward Add(Reward reward)
         {
-           
-            
-            
+
+
+            reward.Users = new List<User>();
             _context.Rewards.Add(reward);
             _context.SaveChanges();
 

@@ -110,8 +110,9 @@ namespace WebApi.Controllers
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            var user =  _userService.GetById(id);
-            var userModel = _mapper.Map<UserModel>(user);
+            UserModel userModel =  _userService.GetById(id);
+            
+           
             return Ok(userModel);
         }
 

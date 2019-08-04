@@ -8,7 +8,7 @@ const mapStateToProps = state => ({
     isLoading: state.userPageReducer.isLoading,
     error: state.userPageReducer.error,
     userInfo: state.userPageReducer.user,
-    user: state.authentication,
+    user: state.authentication.user
 });
 
 const mapDispatchToProps = () => ({

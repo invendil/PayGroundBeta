@@ -72,7 +72,7 @@ namespace DataLayer.Migrations
 
                     b.Property<string>("UrlVideo");
 
-                    b.Property<int?>("UserId");
+                    b.Property<int>("UserId");
 
                     b.HasKey("Id");
 
@@ -186,9 +186,13 @@ namespace DataLayer.Migrations
 
                     b.Property<string>("Name");
 
+                    b.Property<int?>("UserId");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CompanyId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Rewards");
                 });
@@ -274,7 +278,8 @@ namespace DataLayer.Migrations
 
                     b.HasOne("DataLayer.Entityes.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("DataLayer.Entityes.Image", b =>
@@ -311,6 +316,10 @@ namespace DataLayer.Migrations
                         .WithMany("Rewards")
                         .HasForeignKey("CompanyId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("DataLayer.Entityes.User")
+                        .WithMany("Rewards")
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("DataLayer.Entityes.User", b =>

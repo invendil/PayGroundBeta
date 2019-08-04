@@ -13,6 +13,7 @@ import {Redirect} from "react-router-dom";
 import RewardEditorModal from "./RewardEditorModal";
 import RewardSection from "./RewardsSection";
 import CommentContainer from "./CommentsContainer"
+import ReactHtmlParser from "react-html-parser";
 
 const { confirm } = Modal;
 const { TabPane } = Tabs;
@@ -26,8 +27,14 @@ class CampaignPage extends Component {
         this.props.getCampaign(id);
     }
 
-    getRewardHandler = () => {
-        thi
+    getRewardHandler = (reward) => {
+        const {user, match} = this.props;
+        const rewardData ={
+            companyId : Number(match.params.id),
+            userId : user.id,
+            RewardId : reward.id
+        };
+        this.props.getReward(rewardData);
     }
 
     ratingChangeHandler = (ratingState) =>{
@@ -146,6 +153,9 @@ class CampaignPage extends Component {
                                 <Row className="pt-3">
                                     <Col sm={8}>
                                         <h4 className="text-center">Description</h4>
+                                        <p>
+                                            { ReactHtmlParser(campaign.description) }
+                                        </p>
                                     </Col>
                                     <Col sm={4}>
                                         <h4 className="text-center mb-3">
@@ -154,7 +164,11 @@ class CampaignPage extends Component {
                                         {isUserCreator && (
                                             <RewardEditorModal id={Number(match.params.id)} isCreating="true"/>
                                         )}
-                                        <RewardSection id={Number(match.params.id)} isUserCreator={isUserCreator}/>
+                                        <RewardSection
+                                            id={Number(match.params.id)}
+                                            isUserCreator={isUserCreator}
+                                            getRewardHandler = {this.getRewardHandler}
+                                        />
                                     </Col>
                                 </Row>
                             </Container>

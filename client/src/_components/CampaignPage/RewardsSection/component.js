@@ -9,6 +9,8 @@ class RewardSection extends Component {
         getRewards(id);
     }
 
+
+
     render() {
         const {
             rewards,
@@ -17,6 +19,7 @@ class RewardSection extends Component {
             deleteReward,
             isLoading,
             isAuthorized,
+            getRewardHandler
         } = this.props;
 
         return (
@@ -31,6 +34,7 @@ class RewardSection extends Component {
                             isAuthorized={isAuthorized}
                             isUserCreator={isUserCreator}
                             deleteReward={deleteReward}
+                            getRewardHandler = {getRewardHandler}
                         />
                     ))
                 ) : (

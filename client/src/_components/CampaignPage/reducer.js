@@ -67,7 +67,7 @@ export const campaignPageReducer = (state = initialState, action) => {
                 error: action.error,
             };
         case DONATE_SUCCESS:
-            return { ...state, campaign: { currentMoney: action.currentMoney }};
+            return { ...state, campaign: { ...state.campaign, currentMoney: action.currentMoney }};
 
 
         case GET_REWARD:
@@ -78,7 +78,7 @@ export const campaignPageReducer = (state = initialState, action) => {
                 error: action.error,
             };
         case GET_REWARD_SUCCESS:
-            return { ...state, campaign : {currentMoney : action.currentMoney}};
+            return { ...state, campaign : {...state.campaign, currentMoney : action.currentMoney}};
 
 
         case DELETE_CAMPAIGN:
