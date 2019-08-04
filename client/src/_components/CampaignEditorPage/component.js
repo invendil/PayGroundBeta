@@ -57,6 +57,7 @@ class CampaignEditorPage extends React.Component {
                 {campaignResponse.id ? (
                     <Redirect to={`/companies/${campaignResponse.id}`} />
                 ) : null}
+
                 <Formik
                     enableReinitialize
                     initialValues={

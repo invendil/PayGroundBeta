@@ -143,13 +143,13 @@ namespace WebApi.Services
         public void Update(Company company, CompanyModel companyModel)
         {
 
-            var companyForUpdate = _context.Companies
+            Company companyForUpdate = _context.Companies
                  .Include(x => x.Images)
                  .FirstOrDefault(x => x.Id == company.Id);
                  
             
-            AddImages(companyModel.Images, company);
-            companyForUpdate.Images = company.Images;
+            AddImages(companyModel.Images, companyForUpdate);
+            
             companyForUpdate.CategoryId = company.CategoryId;
             companyForUpdate.CreateTime = company.CreateTime;
             companyForUpdate.DesriptionMD = company.DesriptionMD;
@@ -198,6 +198,7 @@ namespace WebApi.Services
 
                     Image image = new Image()
                     {
+                        Company = company,
                         ImageUrl = imageUrl
                     };
 
