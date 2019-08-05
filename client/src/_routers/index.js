@@ -12,7 +12,7 @@ import ProfilePage from "../_components/ProfilePage";
 import {PostsContainer} from "../_components/CampaignPage/PostsContainer/component";
 import {BodyPage} from "../BodyPage";
 import {LoginPage} from "../LoginPage"
-
+import HomePage from "../_components/HomePage/component";
 
 
 const Router = () => {
@@ -20,9 +20,13 @@ const Router = () => {
         <Switch>
 
 
-            <Route exact path="/" component={PostsContainer} />
+            <Route exact path="/" component={HomePage} />
+
+            <Route exact path="/home" component={HomePage} />
+
             <PrivateRoute exact path="/companies/create" component={CreateCampaignPage} />
             <Route exact path="/companies/:id" component={CampaignPage} />
+
             <PrivateRoute exact path="/companies/edit/:id" component={CreateCampaignPage} />
 
             <Route path="/login" component={LoginPage} />
