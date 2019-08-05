@@ -16,6 +16,7 @@ namespace BuissnesLayer.Helpers.Mappers
                 Id = companyModel.Id,
                 Name = companyModel.Name,
                 CategoryId = companyModel.CategoryId,
+
                 GoalMoney = companyModel.GoalMoney,
                 UrlVideo = companyModel.UrlVideo,
                 CreateTime = companyModel.CreateTime != DateTime.MinValue ? companyModel.CreateTime : DateTime.Now,
@@ -36,13 +37,14 @@ namespace BuissnesLayer.Helpers.Mappers
             {
                 Id = company.Id,
                 Name = company.Name,
+                CategoryName = company.Category.Name,
                 CategoryId = company.CategoryId,
                 GoalMoney = company.GoalMoney,
                 UrlVideo = company.UrlVideo,
                 CreateTime = company.CreateTime,
                 FinishTime = company.FinishTime,
                 Description = company.DesriptionMD,
-                UserId = company.User.Id,
+                UserId = company.User != null ? company.User.Id : 0,
                 CurrentMoney = company.CurrentMoney,
                 Rating = company.Rating,
                 RatingsCount = company.RatingsCount

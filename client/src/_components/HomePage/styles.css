@@ -1,7 +1,11 @@
-.carousel{
-    height: 400px !important;
+
+.custom-a {
+    position:absolute !important;
+    bottom:5px !important;
 }
 
-.carousel-image {
-    height: 400px !important;
+.custom-img {
+    max-width: 70% !important;
+    height: auto !important;
 }
+

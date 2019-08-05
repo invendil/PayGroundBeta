@@ -12,7 +12,8 @@ import ProfilePage from "../_components/ProfilePage";
 import {PostsContainer} from "../_components/CampaignPage/PostsContainer/component";
 import {BodyPage} from "../BodyPage";
 import {LoginPage} from "../LoginPage"
-import HomePage from "../_components/HomePage/component";
+import HomePage from "../_components/HomePage";
+import CompaniesList from "../_components/CompaniesListPage";
 
 
 const Router = () => {
@@ -24,9 +25,10 @@ const Router = () => {
 
             <Route exact path="/home" component={HomePage} />
 
+
             <PrivateRoute exact path="/companies/create" component={CreateCampaignPage} />
             <Route exact path="/companies/:id" component={CampaignPage} />
-
+            <Route exact path="/companies/categories/:category" component={CompaniesList} />
             <PrivateRoute exact path="/companies/edit/:id" component={CreateCampaignPage} />
 
             <Route path="/login" component={LoginPage} />

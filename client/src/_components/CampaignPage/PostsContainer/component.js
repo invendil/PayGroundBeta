@@ -5,6 +5,7 @@ import './style.css'
 import {PostCreateComponent} from "./PostCreateComponent/component";
 import { Modal, Button } from 'antd';
 import { postActions } from './actions'
+
 class PostsContainer extends React.Component {
 
     constructor(props){
@@ -43,18 +44,20 @@ class PostsContainer extends React.Component {
         });
 
         this.props.dispatch( postActions.startAddPost() );
+        this.props.dispatch(postActions.getAll(this.props.companyId));
     }
 
     render() {
         const {editPost,editPostId } = this.state;
-        const {posts, companyId} = this.props;
+        const {posts, companyId, isUserCreator} = this.props;
         console.log("Post edit", editPost);
         return (
             <div className="posts-form">
-
-                <button type="primary" onClick={this.showModal}>
-                    Add
-                </button>
+                {isUserCreator &&
+                    <button type="primary" onClick={this.showModal}>
+                        Add
+                    </button>
+                }
 
                 {posts.isPostEditing && editPost && <PostCreateComponent editPost={editPost} editPostId={editPostId} companyId={companyId}/> }
 
@@ -81,7 +84,7 @@ function mapStateToProps(state) {
 
     return {
         posts: posts,
-        companyId : 1031
+        companyId : state.campaignPageReducer.campaign.id,
     }
 }
 

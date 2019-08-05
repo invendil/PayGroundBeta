@@ -15,7 +15,7 @@ import RewardSection from "./RewardsSection";
 import CommentContainer from "../TRASH/CommentsContainer"
 import ReactHtmlParser from "react-html-parser";
 import CommentsTab from "./CommentsTab/component";
-
+import {PostsContainer} from './PostsContainer/component'
 const { confirm } = Modal;
 const { TabPane } = Tabs;
 
@@ -113,11 +113,11 @@ class CampaignPage extends Component {
                                 }
                                 showInfo={false}
                             />
-                            <span>${campaign.goalMoney}</span>
+                            <span className="h4">$ {campaign.currentMoney}</span>
                             <p>pledged out of ${campaign.goalMoney} goal </p>
-                            <span>30</span>
-                            <p>backers</p>
-                            <span>{getLeftDays(campaign.finishTime)}</span>
+                            <span className="h5">
+                                    {getLeftDays(campaign.finishTime)}
+                                </span>
                             <p>days left</p>
                             <p className="">
                                 Creator:{' '}
@@ -175,11 +175,13 @@ class CampaignPage extends Component {
                             </Container>
                         </TabPane>
                         <TabPane tab="News" key="2">
-                           123
+                           <PostsContainer
+                               isUserCreator = {isUserCreator}
+                           />
                         </TabPane>
                         <TabPane tab="Comments" key="3">
                             <CommentsTab
-                                id={match.params.id}
+                                id={Number(match.params.id)}
                                 user={user}
                                 isAuthorized = {isAuthorized}
                             />

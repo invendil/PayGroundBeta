@@ -12,6 +12,9 @@ import {rewardsReducer} from "../_components/CampaignPage/RewardsSection";
 import {createRewardReducer} from '../_components/CampaignPage/RewardEditorModal'
 import {userPageReducer} from '../_components/ProfilePage/reducer'
 import {commentsContainerReducer} from '../_components/TRASH/CommentsContainer/reducer'
+import {homePageReducer} from '../_components/HomePage/reducer'
+import {companiesListReducer} from '../_components/CompaniesListPage/reducer'
+
 
 const rootReducer = combineReducers({
   authentication,
@@ -21,8 +24,10 @@ const rootReducer = combineReducers({
   createCampaignPageReducer,
   campaignPageReducer,
   posts,
+    homePageReducer,
   createRewardReducer,
   rewardsReducer,
+    companiesListReducer,
   userPageReducer,
     commentsContainerReducer,
 

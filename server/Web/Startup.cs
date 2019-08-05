@@ -99,7 +99,7 @@ namespace WebApi
             app.UseStaticFiles();
             app.UseSignalR(routes =>
             {
-                routes.MapHub<CommentsHub>("/commentsHub");
+                routes.MapHub<CommentsHub>("/commentshub");
             });
 
             app.UseAuthentication();

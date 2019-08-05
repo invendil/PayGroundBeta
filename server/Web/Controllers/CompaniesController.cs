@@ -94,7 +94,7 @@ namespace WebApi.Controllers
         {
 
            
-            var categories = _companyCategoryService.getAll();
+            var categories = _companyCategoryService.GetAll();
             
             return Ok(categories);
         }
@@ -111,9 +111,37 @@ namespace WebApi.Controllers
             var companyModel = CompanyMapper.EntityToModel(company);
             companyModel.Images = company.Images.Select(x => x.ImageUrl);
             companyModel.User = userModelCompany;
-            return Ok(companyModel);
+
+
+            return Ok( companyModel );
         }
 
+        [AllowAnonymous]
+        [HttpGet("getsomecompanies")]
+        public IActionResult GetSomeCompanies()
+        {
+            var companies = _companyService.GetSomeCompanies(2);
+            var categories = _companyCategoryService.GetAllNames();
+
+            return Ok(new {  companies, categories });
+        }
+
+        [AllowAnonymous]
+        [HttpGet("categories/{category}")]
+        public IActionResult GetAll(string category)
+        {
+
+            List<CompanyModel> companies;
+            if (category.Equals("all")) { 
+                companies = _companyService.GetAll();
+            } else
+            {
+                companies = _companyService.GetAllByCategory(category);
+            }
+            
+            
+            return Ok(companies);
+        }
 
         [HttpPut("{id}")]
         public IActionResult Update(int id, [FromBody]CompanyModel companyModel)

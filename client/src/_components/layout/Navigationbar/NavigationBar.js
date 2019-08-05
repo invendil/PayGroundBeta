@@ -28,7 +28,7 @@ class NavigationBar extends React.Component{
                             </Nav.Link>
                         </NavItem>
                         <NavItem eventkey={2} href="/">
-                            <Nav.Link as={Link} to="/">
+                            <Nav.Link as={Link} to="/companies/categories/all">
                                 Campaigns
                             </Nav.Link>
                         </NavItem>

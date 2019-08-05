@@ -83,8 +83,8 @@ export const changeRatingState = state => dispatch => {
 
         companyService.changeRatingState(state)
             .then(
-                (rating) => {
-                    dispatch(success( rating));
+                (responce) => {
+                    dispatch(success( responce));
 
 
                 },

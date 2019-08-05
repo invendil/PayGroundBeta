@@ -11,6 +11,9 @@ namespace BuissnesLayer.Interfaces
 
         Company Add(Company company, CompanyModel companyModel);
         Company GetById(int id);
+        List<CompanyModel> GetSomeCompanies(int count);
+        List<CompanyModel> GetAllByCategory(string category);
+        List<CompanyModel> GetAll();
         IEnumerable<Image> GetImagesByCompanyId(int id);
         void Update(Company company, CompanyModel companyModel);
         void Delete(int id);

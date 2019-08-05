@@ -19,19 +19,21 @@ class CommentsTab extends Component {
         this.state = {
             comments: [],
             text: '',
-
+            connection : new HubConnection(config.apiUrl + '/commentshub')
         };
+
     }
 
     componentDidMount() {
 
-        let connection = new HubConnection(config.apiUrl + '/commentsHub');
 
-        connection.on('commentAdded/'+this.props.id, response => {
+
+        this.state.connection.on('commentAdded/'+this.props.id, response => {
             let data ={
                 companyId : this.props.id,
                 userId : this.props.user.id ? this.props.user.id : 0
             };
+            console.log("hub is worked!", data);
             commentService.getAllByCompanyId(data)
                 .then(comments => {
                     this.setState({ comments: comments });
@@ -40,7 +42,7 @@ class CommentsTab extends Component {
                 })
         });
 
-        connection.start();
+        this.state.connection.start();
         let data ={
             companyId : this.props.id,
             userId : this.props.user.id ? this.props.user.id : 0

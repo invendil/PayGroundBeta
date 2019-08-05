@@ -21,9 +21,15 @@ namespace WebApi.Services
         }
         
 
-        public IEnumerable<CompanyCategory> getAll()
+        public IEnumerable<CompanyCategory> GetAll()
         {
             return _context.CompanyCategories;
+        }
+
+
+        public IEnumerable<string> GetAllNames()
+        {
+            return _context.CompanyCategories.Select(x => x.Name);
         }
 
         public int getByName(string name)

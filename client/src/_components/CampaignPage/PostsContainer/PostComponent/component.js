@@ -25,7 +25,8 @@ class PostComponent extends React.Component {
         const {title, time, bodyHtml} = post;
 
         return (
-            <div className="span8">
+
+                <div className="row">
 
                     <button className="pull-right" onClick={this.handleSubmit}>Edit</button>
                     <h1>{title}</h1>
@@ -37,7 +38,8 @@ class PostComponent extends React.Component {
 
                     </div>
 
-            </div>
+                </div>
+
 
 
         );

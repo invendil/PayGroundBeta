@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import CampaignPage from './component';
+import {PostContainer} from './component';
 import {deleteCampaignRequest, getCampaignRequest} from './actions';
 
 export { campaignPageReducer } from './reducer';
@@ -21,4 +21,4 @@ const mapDispatchToProps = () => ({
 export default connect(
     mapStateToProps,
     mapDispatchToProps()
-)(CampaignPage);
+)(PostContainer);

@@ -54,6 +54,7 @@ export const campaignPageReducer = (state = initialState, action) => {
             return {
                 ...state,
                 campaign : {...state.campaign, rating : action.payload},
+
                 isRantingChanged : true
             };
 

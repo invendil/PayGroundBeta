@@ -1,27 +1,26 @@
 import { connect } from 'react-redux';
-import CommentsContainer from './component';
-import {commentsContainerActions} from './actions';
-import {selectCommentsSortedByDate} from './selectors'
-export { commentsContainerReducer } from './reducer';
+
+import {homePageActions} from './actions';
+import HomePage from "./component";
+
+import { homePageReducer } from './reducer'
 
 const mapStateToProps = state => ({
-    isLoading: state.commentsContainerReducer.isLoading,
-    comments: selectCommentsSortedByDate(state),
-    error: state.commentsContainerReducer.error,
+    isLoading: state.homePageReducer.isLoading,
+    companies: state.homePageReducer.companies,
+    categories: state.homePageReducer.categories,
+    error: state.homePageReducer.error,
     user: state.authentication.user,
-    isAuthorized : state.authentication.isAuthorized,
-    isChanged : state.commentsContainerReducer.isChanged
+
 
 });
 
 const mapDispatchToProps = () => ({
-    getComments: commentsContainerActions.getAllCommentsByCompanyId,
-    changeCommentState : commentsContainerActions.changeCommentState,
-    addComment : commentsContainerActions.addComment
+    getSomeCompanies: homePageActions.getSomeCompanies
 
 });
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps()
-)(CommentsContainer);
+)(HomePage);

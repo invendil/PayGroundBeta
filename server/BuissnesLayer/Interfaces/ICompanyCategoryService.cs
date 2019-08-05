@@ -8,7 +8,8 @@ namespace BuissnesLayer.Interfaces
     public interface ICompanyCategoryService
     {
 
-        IEnumerable<CompanyCategory> getAll();
+        IEnumerable<CompanyCategory> GetAll();
+        IEnumerable<string> GetAllNames();
         int getByName(string name);
 
 

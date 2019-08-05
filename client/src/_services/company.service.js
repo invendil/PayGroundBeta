@@ -5,10 +5,12 @@ export const companyService = {
     update,
     getById,
     getCategories,
+    getSomeCompanies,
     getReward,
     donateMoney,
     changeRatingState,
-    delete : _delete
+    delete : _delete,
+    getAllByCategory
 
 
 };
@@ -86,6 +88,24 @@ function getById(id) {
     return fetch(config.apiUrl + '/companies/' + id, requestOptions).then(handleResponse, handleError);
 }
 
+
+function getSomeCompanies() {
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader()
+    };
+
+    return fetch(config.apiUrl + '/companies/getsomecompanies', requestOptions).then(handleResponse, handleError);
+}
+
+function getAllByCategory(category) {
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader()
+    };
+
+    return fetch(config.apiUrl + '/companies/categories/'+category, requestOptions).then(handleResponse, handleError);
+}
 function add(company) {
     let user = JSON.parse(localStorage.getItem('user'));
     console.log("test1", user);

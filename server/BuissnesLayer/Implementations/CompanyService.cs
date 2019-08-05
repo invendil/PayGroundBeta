@@ -113,7 +113,7 @@ namespace WebApi.Services
                 return company.Rating;
             }
 
-            throw new AppException("Rating exception");
+           
         }
 
 
@@ -126,8 +126,88 @@ namespace WebApi.Services
                 .FirstOrDefault(x => x.Id == id);
         }
 
+
+
         
-       
+        public List<CompanyModel> GetSomeCompanies(int count)
+        {
+            var companies = _context.Companies
+                .Include(x => x.Category)
+                .Include(x => x.Images)
+                .Include(x => x.User)
+                .Take(count);
+
+            if (companies == null || companies.Count() == 0)
+                throw new AppException("No companies yet");
+
+            List<CompanyModel> companyModels = new List<CompanyModel>();
+            foreach(Company company in companies)
+            {
+                CompanyModel companyModel = CompanyMapper.EntityToModel(company);
+                companyModel.Images = company.Images.Select(x => x.ImageUrl);
+
+                companyModels.Add(companyModel);
+            }
+            
+
+            
+            
+            return companyModels;
+        }
+
+        public List<CompanyModel> GetAll()
+        {
+
+            var companies = _context.Companies
+                .Include(x => x.Images)
+                .Include(x => x.Category);
+                
+
+            if (companies == null)
+                throw new AppException("No companies, lol");
+
+
+            List<CompanyModel> companyModels = new List<CompanyModel>();
+            foreach (Company company in companies)
+            {
+                CompanyModel companyModel = CompanyMapper.EntityToModel(company);
+                companyModel.Images = company.Images.Select(x => x.ImageUrl);
+
+                companyModels.Add(companyModel);
+            }
+
+
+
+
+            return companyModels;
+        }
+
+        public List<CompanyModel> GetAllByCategory(string category)
+        {
+
+            var companies = _context.Companies
+                .Include(x => x.Images)
+                .Include(x => x.Category)
+                .Where(x => x.Category.Name == category);
+
+            if (companies == null)
+                throw new AppException("No companies by this category");
+
+           
+            List<CompanyModel> companyModels = new List<CompanyModel>();
+            foreach(Company company in companies)
+            {
+                CompanyModel companyModel = CompanyMapper.EntityToModel(company);
+                companyModel.Images = company.Images.Select(x => x.ImageUrl);
+
+                companyModels.Add(companyModel);
+            }
+            
+
+            
+            
+            return companyModels;
+        }
 
         public IEnumerable<Image> GetImagesByCompanyId(int id)
         {

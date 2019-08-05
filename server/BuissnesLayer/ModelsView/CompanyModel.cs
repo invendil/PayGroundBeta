@@ -17,6 +17,7 @@ namespace BuissnesLayer.ModelView
         public string Description { get; set; }
         public int CategoryId { get; set; }
         public string UrlVideo { get; set; }
+        public string CategoryName { get; set; }
         public decimal GoalMoney { get; set; }
         public decimal CurrentMoney { get; set; }
         public IEnumerable<string> Images { get; set; }
